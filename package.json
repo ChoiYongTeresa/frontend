@@ -1,0 +1,17 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "- [ ] 메인 화면 \r - [ ] 로그인/회원가입",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./mainpage.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
