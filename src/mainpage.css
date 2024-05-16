@@ -17,7 +17,6 @@ a {
 /* HEADER */
 header {}
 header .navbar {
-    /* background-color: red; */
     width: 90%;
     height: 80px;
     margin: 0 auto;
@@ -38,24 +37,46 @@ header .navbar .navbar-menu {
     right: 0;
     display: flex;
 }
-header .navbar .navbar-menu ul.menu {
+header .navbar .navbar-menu a.user {
     margin: auto;
+    margin-left: 20px;
+}
+header .navbar .navbar-menu ul.menu {
     display: flex;
+    align-items: center;
 }
-header .navbar .navbar-menu ul.menu li.menu-li {}
-header .navbar .navbar-menu ul.menu li:last-child {
-    margin-left: 30px;
+header .navbar .navbar-menu ul.menu li.menu-list {
+    height: 30px;
+    position: relative;
+    margin: auto;
+
 }
-header .navbar .navbar-menu ul.menu li.menu-li a {
+header .navbar .navbar-menu ul.menu li.menu-list a.menu-list__text {
     font-size: 20px;
     font-weight: 800;
-    padding: 0px 30px;
+    margin: 0px 40px;
     display: block;
     color: black;
 }
-header .navbar .navbar-menu ul.menu li.menu-li a .material-icons {}
-header .navbar .navbar-menu ul.menu li.menu-li ul.donation-menu {}
-header .navbar .navbar-menu ul.menu li.menu-li ul.donation-menu li {}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu {
+    display:none;
+    position: absolute;
+    top: 30px;
+    padding: 10px 40px 0px 40px;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu:hover ul.submenu {
+    display:block;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list {
+    height: 40px;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list a.submenu-list__text {
+    display:block;
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+    color: black;
+}
 
 
 /* CONTENT */
