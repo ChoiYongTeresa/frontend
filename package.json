@@ -4,7 +4,7 @@
   "description": "- [ ] 메인 화면 \r - [ ] 로그인/회원가입",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel ./mainpage.html"
+    "dev": "parcel ./src/mainpage.html"
   },
   "author": "",
   "license": "ISC",

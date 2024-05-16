@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS reset 및 연결 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="mainpage.css">
+    <title>Document</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+			<div>
+        
+				<a href="/" class="logo">
+					<img src="./assets/logo.png" alt="">
+				</a>
+
+        <div class="navbar-menu">
+          <ul class="menu" id="menu">
+            <li class="menu-li">
+              <a href="javascript:void(0)" title="">소개</a>
+            </li>
+            <li class="menu-li">
+              <a href="javascript:void(0)" title="">공지사항</a>
+            </li>
+            <li class="menu-li">
+              <a href="javascript:void(0)" title="">기부 참여</a>
+              <!-- <ul class="donation-menu">
+                <li><a href="javascript:void(0)" title="">기부 신청</a></li>
+                <li><a href="javascript:void(0)" title="">기부 방법</a></li>
+              </ul> -->
+            </li>
+            <li class ="menu-li">
+              <a href="javascript:void(0)" title="">
+                <div class="material-icons">person</div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+			</div>
+	  </nav>
+  </header>
+
+
+  <div class="container-main">
+    <section class="visual" tabindex="0" id="main" style="visibility: visible; opacity: 1;">
+      <div class="wrap">
+        <div class="bx-wrapper" style="max-width: 100%;">
+          <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 185px;">
+            <ul class="slider" style="width: auto; position: relative;">
+            <!-- z-index를 수정하는 방법 -->
+            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 0; display: none;">
+              <span>
+                <img src="javascript:void(0)" alt="">
+                <a href="#" class="btn-move" title="중앙물류센터 바로가기">중앙물류센터</a>
+              </span>
+            </li>
+            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 50; display: list-item;">
+              <span>
+                <img src="javascript:void(0)" alt="일상의 출출함을 달래줍니다. 일상의 출출함을 달래줄 든든한 번호, 푸드뱅크 대표번호는 1688-1377 입니다">
+              </span>
+            </li>
+            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 0; display: none;">
+              <span>
+                <img src="javascript:void(0)" alt="당장 끼니를 걱정하고있나요? 푸드뱅크가 희망의 사다리가 되겠습니다">
+              </span>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

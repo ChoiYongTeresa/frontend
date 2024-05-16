@@ -1,0 +1,64 @@
+/* COMMON */
+body {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    font-family: "Nanum Gothic", sans-serif;
+}
+img {
+    display: block;
+}
+a {
+    color: #333333;
+    text-decoration: none;
+}
+
+/* HEADER */
+header {}
+header .navbar {
+    /* background-color: red; */
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+}
+header .navbar .logo {
+    height: 31px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+header .navbar .navbar-menu {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+}
+header .navbar .navbar-menu ul.menu {
+    margin: auto;
+    display: flex;
+}
+header .navbar .navbar-menu ul.menu li.menu-li {}
+header .navbar .navbar-menu ul.menu li:last-child {
+    margin-left: 30px;
+}
+header .navbar .navbar-menu ul.menu li.menu-li a {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 0px 30px;
+    display: block;
+    color: black;
+}
+header .navbar .navbar-menu ul.menu li.menu-li a .material-icons {}
+header .navbar .navbar-menu ul.menu li.menu-li ul.donation-menu {}
+header .navbar .navbar-menu ul.menu li.menu-li ul.donation-menu li {}
+
+
+/* CONTENT */
+.container-main {
+    display: none;
+}
