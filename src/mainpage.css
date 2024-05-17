@@ -84,3 +84,221 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 .container-main {
     display: none;
 }
+
+.slider li.slider-list img {
+    width: 100vw;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.main-section{
+    position: relative;
+    width: 100vw;
+    height: 90vh;
+}
+
+.sub-section {
+    width: 60vw;
+    height: 90vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.sub-container {
+    width: 800px;
+    height: 800px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+    overflow: hidden;
+}
+.sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.sub-title {
+    font-weight: bold;
+}
+.search-icon {
+    font-size: 18px;
+    cursor: pointer;
+}
+.sub-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    background-color: #F5F5F5;
+}
+.sub-tab {
+    padding: 10px;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+.sub-tab.sub-active {
+    background-color: #2ABF52;
+    color: #FFFFFF;
+    border-radius: 15px 15px 0 0;
+}
+.sub-content {
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.sub-submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background-color: #2ABF52;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0 0 15px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.sub-submit-button:hover {
+    background-color: #249C46;
+}
+
+.content {
+    height: 100vh;
+}
+
+
+.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  
+  .vertical_chart_box {
+    position: relative;
+  }
+  .vertical_chart_box .chart_box {
+    position: relative;
+    margin-bottom: 45px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    height: 200px;
+  }
+  .vertical_chart_box .axis_y {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 100%;
+    font-size: 12px;
+    color: #4a4a4a;
+  }
+  .vertical_chart_box .axis_y:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: #d3d3d3;
+  }
+  .vertical_chart_box .axis_x {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    border-bottom: 1px solid #d3d3d3;
+  }
+  .vertical_chart_box .axis_x .item {
+    flex: 1;
+    position: relative;
+  }
+  .vertical_chart_box .axis_x .item .text_box {
+    position: absolute;
+    bottom: -43px;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  }
+  .vertical_chart_box .axis_x .item .text_box .day {
+    display: block;
+    font-size: 12px;
+    line-height: 19px;
+    color: #4a4a4a;
+  }
+  .vertical_chart_box .axis_x .item .text_box .day.sat {
+    color: #3475ed;
+  }
+  .vertical_chart_box .axis_x .item .text_box .day.sun {
+    color: #eb474a;
+  }
+  .vertical_chart_box .axis_x .item .text_box .time {
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #999;
+  }
+  .vertical_chart_box .axis_x .graph {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    width: 35px;
+    height: 100%;
+    background: #e8e8e8;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+  }
+  .vertical_chart_box .axis_x .graph .time {
+    display: block;
+    position: relative;
+    margin-bottom: -4px;
+    padding-top: 4px;
+    box-sizing: content-box;
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+}
+.vertical_chart_box .axis_x .graph .time.data1 {
+  background: #e73ea9;
+  z-index: 3;
+}
+.vertical_chart_box .axis_x .graph .time.data2 {
+  background: #30d97d;
+  z-index: 1;
+}
+.vertical_chart_box .axis_x button.graph {
+  border: 0;
+}

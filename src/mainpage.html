@@ -6,9 +6,15 @@
     
     <!-- CSS reset 및 연결 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- bxSlider (이미지 슬라이더) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <!-- Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="mainpage.css">
+    <script type="module" src="./mainpage.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -49,35 +55,120 @@
 	  </nav>
   </header>
 
+<div class="mainpage">
+  <div class="content">
+    <div class="main-section">
 
-  <div class="container-main">
-    <section class="visual" tabindex="0" id="main" style="visibility: visible; opacity: 1;">
-      <div class="wrap">
-        <div class="bx-wrapper" style="max-width: 100%;">
-          <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 185px;">
-            <ul class="slider" style="width: auto; position: relative;">
-            <!-- z-index를 수정하는 방법 -->
-            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 0; display: none;">
-              <span>
-                <img src="javascript:void(0)" alt="">
-                <a href="#" class="btn-move" title="중앙물류센터 바로가기">중앙물류센터</a>
-              </span>
-            </li>
-            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 50; display: list-item;">
-              <span>
-                <img src="javascript:void(0)" alt="일상의 출출함을 달래줍니다. 일상의 출출함을 달래줄 든든한 번호, 푸드뱅크 대표번호는 1688-1377 입니다">
-              </span>
-            </li>
-            <li style="float: none; list-style: none; position: absolute; width: 345px; z-index: 0; display: none;">
-              <span>
-                <img src="javascript:void(0)" alt="당장 끼니를 걱정하고있나요? 푸드뱅크가 희망의 사다리가 되겠습니다">
-              </span>
-            </li>
-            </ul>
+      <ul class="slider">
+        <li class="slider-list"><img src="./assets/main_image1.jpg" /></li>
+        <li class="slider-list"><img src="./assets/main_image2.jpg" /></li>
+        <li class="slider-list"><img src="./assets/main_image3.jpg" /></li>
+      </ul>
+
+      <div class="sub-section">
+        <div class="sub-container">
+          <div class="sub-header">
+              <span class="sub-title">최근 기부 내역</span>
+              <div class="material-icons">search</div>
           </div>
+          <div class="sub-tabs">
+              <button class="sub-tab sub-active">대기</button>
+              <button class="sub-tab">승인완료</button>
+              <button class="sub-tab">서류제출</button>
+              <button class="sub-tab">기부</button>
+          </div>
+          <div class="sub-content">
+              <p>햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개</p>
+          </div>
+          <button class="sub-submit-button">서류 제출하기</button>
         </div>
       </div>
-    </section>
+
+    </div>
   </div>
+
+  <div class="content">
+    <div class="vertical_chart_box">
+      <div class="chart_box">
+        <ul class="axis_y">
+          <li class="item">0<span class="blind">시간</span></li>
+          <li class="item">3<span class="blind">시간</span></li>
+          <li class="item">6<span class="blind">시간</span></li>
+          <li class="item">9<span class="blind">시간</span></li>
+          <li class="item">12<span class="blind">시간</span></li>
+        </ul>
+        <ul class="axis_x">
+          <li class="item">
+            <div class="text_box">
+              <strong class="day">17(월)</strong>
+              <span class="time">00시간</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data1" style="height:80%;"><span class="blind">data 타입 1</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day">18(화)</strong>
+              <span class="time">00시간</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
+              <span class="time data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+              <span class="time data3" style="height:10%;"><span class="blind">data 타입 3</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day">19(수)</strong>
+              <span class="time">00시간</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data3" style="height:100%;"><span class="blind">data 타입 3</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day">20(목)</strong>
+              <span class="time">00시간</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day">21(금)</strong>
+              <span class="time">00시간</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+              <span class="time data3" style="height:40%;"><span class="blind">data 타입 3</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day sat">22(토)</strong>
+              <span class="time">휴일</span>
+            </div>
+            <button type="button" class="graph">
+              <span class="time data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+            </button>
+          </li>
+          <li class="item">
+            <div class="text_box">
+              <strong class="day sun">23(일)</strong>
+              <span class="time">휴일</span>
+            </div>
+            <button type="button" class="graph"></button>
+          </li>
+        </ul>
+      </div>                                                 
+    </div>
+  </div>
+
+</div>
+
+
 </body>
 </html>
