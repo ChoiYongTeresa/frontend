@@ -80,6 +80,4 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 
 
 /* CONTENT */
-.container-main {
-    display: none;
-}
+.container-main {}
