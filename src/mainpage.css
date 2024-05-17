@@ -15,10 +15,11 @@ a {
 }
 
 /* HEADER */
-header {}
+header {
+}
 header .navbar {
     width: 90%;
-    height: 80px;
+    height: 8vh;
     margin: 0 auto;
     position: relative;
 }
