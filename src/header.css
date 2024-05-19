@@ -1,0 +1,61 @@
+header .navbar {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+}
+header .navbar .logo {
+    height: 31px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+header .navbar .navbar-menu {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+}
+header .navbar .navbar-menu a.user {
+    margin: auto;
+    margin-left: 20px;
+}
+header .navbar .navbar-menu ul.menu {
+    display: flex;
+    align-items: center;
+}
+header .navbar .navbar-menu ul.menu li.menu-list {
+    height: 30px;
+    position: relative;
+    margin: auto;
+
+}
+header .navbar .navbar-menu ul.menu li.menu-list a.menu-list__text {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0px 40px;
+    display: block;
+    color: black;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu {
+    display:none;
+    position: absolute;
+    top: 30px;
+    padding: 10px 40px 0px 40px;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu:hover ul.submenu {
+    display:block;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list {
+    height: 40px;
+}
+header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list a.submenu-list__text {
+    display:block;
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+    color: black;
+}
