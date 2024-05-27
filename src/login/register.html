@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    
+    <!-- CSS reset 및 연결 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./register.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script type="module" src="./register.js"></script>
+</head>
+<body>
+    
+    <div class="member">
+        <!-- 1. 로고 -->
+        <img class="logo" src="./assets/logo.png">
+
+        <!-- 2. 필드 -->
+        <div class="field">
+            <b>아이디</b>
+            <span class="placehold-text"><input type="text"></span>
+        </div>
+        <div class="field">
+            <b>비밀번호</b>
+            <input class="userpw" type="password">
+        </div>
+        <div class="field">
+            <b>비밀번호 재확인</b>
+            <input class="userpw-confirm" type="password">
+        </div>
+        <div class="field">
+            <b>이름</b>
+            <input type="text">
+        </div>
+
+        <!-- 5. 이메일_전화번호 -->
+        <div class="field">
+            <b>이메일</b>
+            <input type="email" placeholder="선택입력">
+        </div>
+        
+        <div class="field tel-number">
+            <b>휴대전화</b>
+            <!-- <select>
+                <option value="">대한민국 +82</option>
+            </select> -->
+            <div>
+                <input type="tel" placeholder="전화번호 입력">
+                <!-- <input type="button" value="인증번호 받기"> -->
+            </div>
+            <!-- <input type="number" placeholder="인증번호를 입력하세요"> -->
+        </div>
+        
+        <div class="field address">
+            <b>주소</b>
+            <div>
+                <input type="text" placeholder="">
+                <input type="button" value="우편번호 검색">
+            </div>
+            <div>
+                <input type="text" placeholder="">
+                <input type="text" placeholder="상세주소 입력">
+            </div>
+        </div>
+
+        <!-- 6. 가입하기 버튼 -->
+        <input type="submit" value="가입하기">
+
+        <!-- 7. 푸터
+        <div class="member-footer">
+            <div>
+                <a href="#none">이용약관</a>
+                <a href="#none">개인정보처리방침</a>
+                <a href="#none">책임의 한계와 법적고지</a>
+                <a href="#none">회원정보 고객센터</a>
+            </div>
+            <span><a href="#none">NAVER Corp.</a></span>
+        </div> -->
+    </div>
+
+</body>
+</html>
