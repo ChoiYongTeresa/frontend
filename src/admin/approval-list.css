@@ -1,0 +1,98 @@
+/* approval-list.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-main {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.center-title {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+.approval-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.approval-table th {
+    border-top: 2px solid #888; /* 제목 열 구분선을 더 진하게 설정 */
+    border-bottom: 2px solid #888; /* 제목 열 구분선을 더 진하게 설정 */
+    padding: 10px;
+    text-align: center;
+    background-color: transparent; /* 제목 열 배경색 제거 */
+    /* font-weight: bold; */
+}
+
+.approval-table td {
+    border-bottom: 1px solid #ddd; /* 나머지 행의 구분선을 연하게 설정 */
+    padding: 10px;
+    text-align: center;
+}
+
+/* 열의 너비 비율 설정 */
+.approval-table th:nth-child(1),
+.approval-table td:nth-child(1) {
+    width: 5%;
+}
+
+.approval-table th:nth-child(2),
+.approval-table td:nth-child(2) {
+    width: 70%;
+}
+
+.approval-table th:nth-child(3),
+.approval-table td:nth-child(3) {
+    width: 10%;
+}
+
+.approval-table th:nth-child(4),
+.approval-table td:nth-child(4) {
+    width: 15%;
+}
+
+/* 상태에 따른 텍스트 색상 */
+.status-pending {
+    color: gray;
+}
+
+.status-approved {
+    color: #28995C;
+}
+
+/* 페이지 네비게이션 스타일 */
+.pagination {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.pagination button {
+    border: none;
+    background-color: transparent;
+    padding: 8px;
+    /* margin: 0 2px; */
+    cursor: pointer;
+    width: 30px;
+}
+
+.pagination button.active {
+    /* background-color: #28995C; */
+    color: #28995C;
+}
+
+.pagination button:hover {
+    background-color: #ddd;
+    color: #fff
+}
