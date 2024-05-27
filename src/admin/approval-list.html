@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="approval-list.css">
+        <script src="approval-list.js" defer></script>
+    </head>
+    <body>
+        <div class="container-main">
+            <h1 class="center-title">관리자 승인 현황</h1>
+            <table class="approval-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>승인 현황</th>
+                    </tr>
+                </thead>
+                <tbody id="approval-list">
+                    <!-- JavaScript를 통해 동적으로 데이터가 로드됩니다 -->
+                </tbody>
+            </table>
+            <div id="pagination" class="pagination">
+                <!-- 페이지 네비게이션 버튼이 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </body>
+</html>
