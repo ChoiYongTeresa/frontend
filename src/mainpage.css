@@ -81,20 +81,29 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 
 
 /* CONTENT */
-.container-main {
-    display: none;
+.bx-wrapper {
+  border : 0px;
+  height: 90vh;
+  box-shadow: none;
 }
 
-.slider li.slider-list img {
-    width: 100vw;
-    height: 90vh;
+.bx-viewport {
+  
+  height: 80%;
+}
+ul.slider-ul li.slider-list img {
+  /* display: none; */
+  /* 스크롤바의 너비: 100vw - 100% */
+	width: calc(100vw - (100vw - 100%));
+  height: 90%;
     object-fit: cover;
 }
 
 .main-section{
     position: relative;
-    width: 100vw;
-    height: 90vh;
+    /* 스크롤바의 너비: 100vw - 100% */
+    width: calc(100vw - (100vw - 100%));
+    height: 90%;
 }
 
 .sub-section {
@@ -105,8 +114,8 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     left: 0;
 }
 .sub-container {
-    width: 800px;
-    height: 800px;
+    width: 300px;
+    height: 300px;
     position:absolute;
     top:0;
     bottom:0;
