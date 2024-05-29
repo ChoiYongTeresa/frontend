@@ -32,6 +32,11 @@ header .navbar .logo {
     bottom: 0;
     left: 0;
     margin: auto;
+    display: flex;
+    align-items: center;
+}
+header .navbar .logo img {
+  height: 22px;
 }
 header .navbar .navbar-menu {
     position:absolute;
@@ -44,6 +49,8 @@ header .navbar .navbar-menu a.user {
     margin: auto;
     margin-left: 20px;
     color: black;
+    display: flex;
+    align-items: center;
 }
 header .navbar .navbar-menu ul.menu {
     display: flex;
@@ -53,10 +60,12 @@ header .navbar .navbar-menu ul.menu li.menu-list {
     height: 30px;
     position: relative;
     margin: auto;
+    display: flex;
+    align-items: center;
 
 }
 header .navbar .navbar-menu ul.menu li.menu-list a.menu-list__text {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 800;
     margin: 0px 40px;
     display: block;
@@ -69,6 +78,7 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu {
     padding: 10px 40px 0px 40px;
 }
 header .navbar .navbar-menu ul.menu li.donation-menu:hover ul.submenu {
+  background-color: #B0B0B0;
     display:block;
 }
 header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list {
@@ -76,7 +86,7 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 }
 header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list a.submenu-list__text {
     display:block;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 800;
     display: block;
     color: black;
