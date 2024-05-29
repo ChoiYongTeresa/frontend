@@ -1,11 +1,12 @@
 $(document).ready(function(){
-    $(".slider").bxSlider({
+    $(".slider-ul").bxSlider({
         auto: true,             // 이미지 회전 자동
 		speed: 2000,             // 다음 이미지로 넘어가는데 걸리는 시간(ms)
 		pause: 4000,            // 이미지가 멈추는 시간(ms)
 		mode:'fade',            // 이미지 교체 방식
 		autoControls: false,     // 시작 중지 버튼 표시
 		pager:false,             // 페이지 바로가기 표시
+		controls: false,		// 화살표 표시
     });
 });
 
