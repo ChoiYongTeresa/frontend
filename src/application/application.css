@@ -9,6 +9,7 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     color : #222;
     line-height: 1.4;
+    font-size: 14px;
 }
 img {
     display: block;
@@ -106,7 +107,6 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 .content {
     /* 스크롤바의 너비: 100vw - 100% */
     width: calc(100vw - (100vw - 100%));
-    /* margin-top: 8vh; */
 }
 .application{
     width: 800px;
@@ -121,26 +121,23 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     margin-bottom: 80px;
     font-weight: bold;
 }
+
 .info-section {
-    margin-bottom: 70px;
+    margin-bottom: 80px;
 }
-.sub-title {
+.info-section .sub-title {
     font-size: 22px;
     margin-bottom: 40px;
     font-weight: bold;
 }
-
-.field{
-    margin: 10px 0; /*상하로 좀 띄워주기*/
+.info-section .field{
+    margin: 15px 0; /*상하로 좀 띄워주기*/
 }
-
-.field b{
-    font-size:14px;
-    display: block; /*수직 정렬하기 */
+.info-section .field .field-title{
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
-/*input 중 radio 는 width 가 100%면 안되니까 */
 .application input:not(input[type=radio], input[type=checkbox]), .application select{
     border: 1px solid #dadada;
     padding: 15px;
@@ -148,17 +145,29 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     margin-bottom: 5px;
 }
 
-.application input[type=button],
-.application input[type=submit]{
-    background-color: #28995C;
-    color:#fff;
-    font-size: 20px;
-    font-weight: 600;
+.info-section .field.item-btn {
+    width: 30%;
+    margin: 0 auto;
+}
+.info-section .field.item-btn input[type=button] {
+    background-color: #28995C; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 13px 40px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+}
+.field.apply-btn input[type=button] {
+    background-color: #28995C; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 13px 40px;
+    font-size: 17px;
+    cursor: pointer;
 }
 
-.application input:focus, .application select:focus{
-    border: 3px solid #28995C;
-}
 
 #gallery-container {
     display: flex;
