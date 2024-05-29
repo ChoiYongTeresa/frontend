@@ -1,21 +1,23 @@
 /* COMMON */
 body {
-    color: #333333;
-    font-size: 16px;
-    font-weight: 400;
     line-height: 1.4;
-    font-family: "Nanum Gothic", sans-serif;
 }
 img {
     display: block;
 }
 a {
-    color: #333333;
     text-decoration: none;
 }
 
 /* HEADER */
 header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  /* width: 100% */
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 header .navbar {
     width: 90%;
@@ -41,6 +43,7 @@ header .navbar .navbar-menu {
 header .navbar .navbar-menu a.user {
     margin: auto;
     margin-left: 20px;
+    color: black;
 }
 header .navbar .navbar-menu ul.menu {
     display: flex;
@@ -81,109 +84,183 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
 
 
 /* CONTENT */
-.bx-wrapper {
-  border : 0px;
-  height: 90vh;
-  box-shadow: none;
-}
-
-.bx-viewport {
-  
-  height: 80%;
-}
-ul.slider-ul li.slider-list img {
-  /* display: none; */
-  /* 스크롤바의 너비: 100vw - 100% */
-	width: calc(100vw - (100vw - 100%));
-  height: 90%;
-    object-fit: cover;
+.content {
+  background-color: #249C46;
+  height: 100vh;
 }
 
 .main-section{
-    position: relative;
-    /* 스크롤바의 너비: 100vw - 100% */
-    width: calc(100vw - (100vw - 100%));
-    height: 90%;
+  position: relative;
+  /* 스크롤바의 너비: 100vw - 100% */
+  width: calc(100vw - (100vw - 100%));
+  height: 92vh;
+  margin-top: 8vh;
 }
 
-.sub-section {
-    width: 60vw;
-    height: 90vh;
-    position: absolute;
-    top: 0;
-    left: 0;
+/* bxSlider에서 정해진 클래스 */
+.bx-wrapper {
+  border : 0px;
+  box-shadow: none;
+  height: 100%;
+  /* original design */
+  max-width: 100%;
 }
-.sub-container {
-    width: 300px;
-    height: 300px;
+.bx-viewport {
+  /* original design */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 100% !important;
+}
+ul.slider-ul li.slider-list img {
+  /* 스크롤바의 너비: 100vw - 100% */
+	width: calc(100vw - (100vw - 100%));
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 최근 기부 내역 section */
+.content-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top:0;
+}
+.content-section .sub-section {
+  flex: 3;
+  position: relative;
+}
+.sub-section .sub-container {
+  display: flex;
+  flex-direction: column;
+    width: 30vw;
+    height: 30vw;
     position:absolute;
     top:0;
     bottom:0;
     left:0;
     right:0;
     margin: auto;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px;
     background-color: #FFFFFF;
     overflow: hidden;
 }
-.sub-header {
+
+.sub-container .sub-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px 20px 10px 20px;
 }
-.sub-title {
-    font-weight: bold;
+.sub-container .sub-header span.sub-title {
+    font-weight: 900;
 }
-.search-icon {
-    font-size: 18px;
-    cursor: pointer;
+.sub-container .sub-header .search-icon {
+  color: #28995C;
+  cursor: pointer;
 }
-.sub-tabs {
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 1px solid #ddd;
-    background-color: #F5F5F5;
+
+.sub-container .sub-tabs {
+  padding: 0px 70px;
 }
-.sub-tab {
-    padding: 10px;
-    flex: 1;
+.sub-container .sub-tabs .tracker {
+  display: flex;
+  flex-direction: row;
+}
+.sub-container .sub-tabs .tracker .step {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sub-container .sub-tabs .tracker .step .step-circle {
+  width: 100%;
+  height: 100%;
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sub-container .sub-tabs .tracker .step .step-circle .circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #B0B0B0;
+}
+.sub-container .sub-tabs .tracker .step .step-circle .circle.active {
+  width: 28px;
+  height: 28px;
+  background: #28995C; /* Green color for active steps */
+}
+.sub-container .sub-tabs .tracker .step .step-content {
+  flex: 1;
+  font-size: 10px;
+  margin-top: 5px;
+}
+.sub-container .sub-tabs .tracker .line {
+  height: 2px;
+  flex-grow: 1;
+  background: #B0B0B0;
+  margin: 12px 5px 0px 5px;
+}
+
+.sub-container .sub-content {
+  margin: auto 30px;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.sub-container .sub-submit-button {
+    padding: 20px;
     text-align: center;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-}
-.sub-tab.sub-active {
-    background-color: #2ABF52;
-    color: #FFFFFF;
-    border-radius: 15px 15px 0 0;
-}
-.sub-content {
-    padding: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-.sub-submit-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    text-align: center;
-    background-color: #2ABF52;
+    background-color: #28995C;
     color: #FFFFFF;
     border: none;
     border-radius: 0 0 15px 15px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 24px;
+    font-weight: bold;
 }
 .sub-submit-button:hover {
     background-color: #249C46;
 }
 
-.content {
-    height: 100vh;
+.content-section .btn-section {
+  flex: 2;
+  display: flex;
+}
+.content-section .btn-section .btn-container {
+  margin: auto 0;
+  overflow:auto;
+}
+.btn-section .btn-content {
+  font-size: 28px;
+  color:white;
+  font-weight: bold;
+  text-shadow: 1px 2px gray;
+  margin-bottom: 7vh;
+}
+.btn-section button.btn-donation {
+  background-color: #28995C; /* Green background */
+    color: white; /* White text */
+    border: none;
+    padding: 13px 40px;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+}
+.btn-section button.btn-donation:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+}
+
+
+/* CHART */
+.vertical_chart_box {
+  display: none;
 }
 
 
