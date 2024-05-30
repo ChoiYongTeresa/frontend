@@ -16,7 +16,7 @@
     <!-- JQuery -->
     <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
     <script type="text/javascript">   
-      $(document).ready( function() { $("#headers").load("./header.html"); });
+      $(document).ready( function() { $("#headers").load("../header.html"); });
     </script>
     <link rel="stylesheet" href="mainpage.css">
     <script type="module" src="./mainpage.js"></script>
@@ -30,9 +30,9 @@
   <div class="content">
 
     <ul class="slider-ul">
-      <li class="slider-list"><img src="./assets/main_image1.jpg" /></li>
-      <li class="slider-list"><img src="./assets/main_image2.jpg" /></li>
-      <li class="slider-list"><img src="./assets/main_image3.jpg" /></li>
+      <li class="slider-list"><img src="../assets/main_image1.jpg" /></li>
+      <li class="slider-list"><img src="../assets/main_image2.jpg" /></li>
+      <li class="slider-list"><img src="../assets/main_image3.jpg" /></li>
     </ul>
 
     <div class="content-section">
@@ -76,7 +76,7 @@
           <div class="sub-content">
               <p>햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개</p>
           </div>
-          <button class="sub-submit-button">서류 제출하기</button>
+          <button class="sub-submit-button" onClick="location.href='../user/approval-status.html'">서류 제출하기</button>
         </div>
       </div>
 
@@ -86,7 +86,7 @@
             <p>오늘의 작은 나눔,<br>내일의 큰 희망</p>
           </div>
           <div class="btn-div">
-            <button class="btn-donation">기부하러 가기</button>
+            <button class="btn-donation" onClick="location.href='../application/application.html'">기부하러 가기</button>
           </div>
         </div>
       </div>
