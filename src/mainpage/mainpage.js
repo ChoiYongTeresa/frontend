@@ -38,3 +38,29 @@ $(window).on("wheel", function(e){
 	$html.animate({scrollTop : posTop});
  
 });
+
+
+// 더미 데이터
+const dummyData = { items:"햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개" };
+const subContentDiv = document.querySelector('.sub-content p');
+
+const memberid = "";
+// main 최근 기부내역 불러오기
+document.addEventListener('DOMContentLoaded', function() {
+	if (memberid == "") {
+		subContentDiv.innerHTML = "로그인해주세요.";
+		return;
+	}
+    // API 호출 함수
+	fetch("/donations/"+memberid)
+	.then(resp=>resp.json())
+	.then(data => {
+		subContentDiv.innerHTML = data.items;
+		// API 필드 이름으로 수정해야함.
+	})
+	.catch(error => {
+		console.error('Error fetching data:', error)
+		console.log(dummyData)
+		subContentDiv.innerHTML = dummyData.items;
+	});
+});
