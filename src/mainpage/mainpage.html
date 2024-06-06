@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS reset 및 연결 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- bxSlider (이미지 슬라이더) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- JQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
+    <script type="text/javascript">   
+      $(document).ready( function() { $("#headers").load("../header.html"); });
+    </script>
+    <link rel="stylesheet" href="mainpage.css">
+    <script type="module" src="./mainpage.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <!-- HEADER -->
+  <div id="headers"></div>
+
+<div class="mainpage">
+  <div class="content">
+
+    <ul class="slider-ul">
+      <li class="slider-list"><img src="../assets/main_image1.jpg" /></li>
+      <li class="slider-list"><img src="../assets/main_image2.jpg" /></li>
+      <li class="slider-list"><img src="../assets/main_image3.jpg" /></li>
+    </ul>
+
+    <div class="content-section">
+      <div class="sub-section">
+        <div class="sub-container">
+          <div class="sub-header">
+              <span class="sub-title">최근 기부 내역</span>
+              <div class="material-icons search-icon">search</div>
+          </div>
+          <div class="sub-tabs">
+            <div class="tracker">
+              <div class="step">
+                <div class="step-circle">
+                  <div class="circle"></div>
+                </div>
+                <div class="step-content">대기</div>
+              </div>
+              <div class="line"></div>
+              <div class="step">
+                <div class="step-circle">
+                  <div class="circle active"></div>
+                </div>
+                <div class="step-content">승인완료</div>
+              </div>
+              <div class="line"></div>
+              <div class="step">
+                <div class="step-circle">
+                  <div class="circle"></div>
+                </div>
+                <div class="step-content">서류제출</div>
+              </div>
+              <div class="line"></div>
+              <div class="step">
+                <div class="step-circle">
+                  <div class="circle"></div>
+                </div>
+                <div class="step-content">기부</div>
+              </div>
+            </div>
+          </div>
+          <div class="sub-content">
+              <p>햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개</p>
+          </div>
+          <button class="sub-submit-button" onClick="location.href='../user/approval-status.html'">서류 제출하기</button>
+        </div>
+      </div>
+
+      <div class="btn-section">
+        <div class="btn-container">
+          <div class="btn-content">
+            <p>오늘의 작은 나눔,<br>내일의 큰 희망</p>
+          </div>
+          <div class="btn-div">
+            <button class="btn-donation" onClick="location.href='../application/application.html'">기부하러 가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content chart-content">
+    <div class="chart-title">
+      <p>푸드뱅크에 음식이 이만큼 있어요!</p>
+    </div>
+    <div class="chart-section">
+      <div class="vertical_chart_box">
+        <div class="chart_box">
+          <ul class="axis_y">
+            <li class="item">0<span class="blind">시간</span></li>
+            <li class="item">50<span class="blind">시간</span></li>
+            <li class="item">100<span class="blind">시간</span></li>
+            <li class="item">150<span class="blind">시간</span></li>
+            <li class="item">200<span class="blind">시간</span></li>
+          </ul>
+          <ul class="axis_x">
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">가공식품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data1" style="height:80%;"><span class="blind">data 타입 1</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">신선식품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data1" style="height:50%;"><span class="blind">data 타입 1</span></span>
+                <span class="xlist data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+                <span class="xlist data3" style="height:10%;"><span class="blind">data 타입 3</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">일상용품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data3" style="height:100%;"><span class="blind">data 타입 3</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">가정용품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data1" style="height:100%;"><span class="blind">data 타입 1</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">의약품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data1" style="height:40%;"><span class="blind">data 타입 1</span></span>
+                <span class="xlist data3" style="height:40%;"><span class="blind">data 타입 3</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">문화용품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">내구소비재</span>
+              </div>
+              <button type="button" class="graph"></button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">의류</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">스포츠용품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+              </button>
+            </li>
+            <li class="item">
+              <div class="text_box">
+                <span class="xlist">기타상품</span>
+              </div>
+              <button type="button" class="graph">
+                <span class="xlist data2" style="height:20%;"><span class="blind">data 타입 2</span></span>
+              </button>
+            </li>
+          </ul>
+        </div>  
+        <div class="chart-list">
+          <ul class="chart-ul">
+            <li class="chart-li">
+              <div class="chart-color data1"></div>
+              <div class="chart-list-title data1">서구</div>
+            </li>
+            <li class="chart-li">
+              <div class="chart-color data2"></div>
+              <div class="chart-list-title data2">동구</div>
+            </li>
+            <li class="chart-li">
+              <div class="chart-color data3"></div>
+              <div class="chart-list-title 대덕구">대덕구</div>
+            </li>
+            <li class="chart-li">
+              <div class="chart-color data4"></div>
+              <div class="chart-list-title data4">유성구</div>
+            </li>
+            <li class="chart-li">
+              <div class="chart-color data5"></div>
+              <div class="chart-list-title data5">중구</div>
+            </li>
+          </ul>
+        </div>                                               
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+
+</body>
+</html>

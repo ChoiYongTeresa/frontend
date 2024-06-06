@@ -1,0 +1,152 @@
+/* Google web font CDN*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
+*{
+    box-sizing: border-box; /*전체에 박스사이징*/
+    outline: none; /*focus 했을때 테두리 나오게 */
+}
+
+body{
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    font-size:14px;
+    background-color: #f5f6f7;
+    line-height: 1.5em;
+    color : #222;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #28995C;
+    font-weight: bold;
+}
+a:hover{
+    cursor: pointer;
+}
+
+/*member sign in*/
+.member{
+    width: 400px;
+    /* border: 1px solid #000; */
+    margin: auto; /*중앙 정렬*/
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.member .logo{
+    /*로고는 이미지라 인라인 블록이니까 마진 오토 안됨 블록요소만 됨 */
+    display: block;
+    margin :50px auto;
+}
+
+.member .field{
+    margin :5px 0; /*상하로 좀 띄워주기*/
+}
+
+.member b{
+    /* border: 1px solid #000; */
+    display: block; /*수직 정렬하기 */
+    margin-bottom: 5px;
+}
+
+/*input 중 radio 는 width 가 100%면 안되니까 */
+.member input:not(input[type=radio], input[class=btn]),.member select{
+    border: 1px solid #dadada;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.member input[type=button],
+.member input[type=submit]{
+background-color: #2db400;
+color:#fff
+}
+
+.member input:focus, .member select:focus{
+    border: 1px solid #2db400;
+}
+
+.field {
+    padding: 5px 0px;
+}
+
+.placehold-text{
+    display: block; /*span 으로 감싸서 크기영역을 블록요소로 만들어ㅜ저야한다*/
+    position:relative;
+    /* border: 1px solid #000; */
+}
+
+.placehold-text:before{ 
+    content : "우편번호 검색";
+    position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
+    right : 20px;
+    top:13px;
+}
+
+.userpw{
+    background:url(./images/images2/icon-01.png) no-repeat center right 15px;
+    background-size: 20px;
+    background-color: #fff;
+}
+
+.userpw-confirm{
+    background:url(./images/images2/icon-02.png) no-repeat center right 15px;
+    background-size: 20px;
+    background-color: #fff;
+}
+
+.member-footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.member-footer div a:hover{
+    text-decoration: underline;
+    color:#2db400
+}
+
+.member-footer div a:after{
+    content:'|';
+    font-size: 10px;
+    color:#bbb;
+    margin-right: 5px;
+    margin-left: 7px;
+    /*살짝 내려가 있기 때문에 위로 올려주기 위해 transform 사용하기*/
+    display: inline-block;
+    transform: translateY(-1px);
+
+}
+
+.member-footer div a:last-child:after{
+    display: none;
+}
+
+@media (max-width:768px) {
+    .member{
+        width: 100%;
+    }
+}
+/* 출처: https://j-ungry.tistory.com/322 [정구리의 우주정복:티스토리] */
+
+.btn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #28995C, #5AC38B, #28995C);
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 2rem 0;
+    cursor: pointer;
+    transition: .5s;
+  }
+  .btn:hover{
+    background-position: right;
+  }
