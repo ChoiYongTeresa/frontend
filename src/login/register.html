@@ -8,6 +8,7 @@
     <!-- CSS reset 및 연결 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="./register.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script type="module" src="./register.js"></script>
@@ -21,11 +22,11 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <input type="text">
+            <input type="text" id="id">
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password">
+            <input class="userpw" type="password" id="pw">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
@@ -33,36 +34,36 @@
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text">
+            <input type="text" id="name">
         </div>
 
     
         <div class="field tel-number">
             <b>전화번호</b>
             <div>
-                <input type="tel" placeholder="전화번호 입력">
+                <input type="tel" placeholder="전화번호 입력" id="tel">
             </div>
         </div>
         
         <div class="field address">
             <b>주소</b>
             <div>
-                <a class="placehold-text"><input type="text"></a>
+                <a class="placehold-text"><input type="text" id="zip-code"></a>
             </div>
             <div>
-                <input type="text" placeholder="">
-                <input type="text" placeholder="상세주소 입력">
+                <input type="text" placeholder="" id="addr">
+                <input type="text" placeholder="상세주소 입력" id="road-addr">
             </div>
         </div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>이메일</b>
-            <input type="email" placeholder="선택입력">
+            <input type="email" placeholder="선택입력" id="email">
         </div>
 
         <!-- 6. 가입하기 버튼 -->
-        <input type="button" class="btn" value="Sign Up">
+        <input type="button" class="btn" id="signupbtn" value="Sign Up">
 
         <!-- 7. 푸터
         <div class="member-footer">
