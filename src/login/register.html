@@ -16,12 +16,12 @@
     
     <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="./assets/logo.png">
+        <img class="logo" src="../assets/logo.png">
 
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input type="text"></span>
+            <input type="text">
         </div>
         <div class="field">
             <b>비밀번호</b>
@@ -36,29 +36,18 @@
             <input type="text">
         </div>
 
-        <!-- 5. 이메일_전화번호 -->
-        <div class="field">
-            <b>이메일</b>
-            <input type="email" placeholder="선택입력">
-        </div>
-        
+    
         <div class="field tel-number">
-            <b>휴대전화</b>
-            <!-- <select>
-                <option value="">대한민국 +82</option>
-            </select> -->
+            <b>전화번호</b>
             <div>
                 <input type="tel" placeholder="전화번호 입력">
-                <!-- <input type="button" value="인증번호 받기"> -->
             </div>
-            <!-- <input type="number" placeholder="인증번호를 입력하세요"> -->
         </div>
         
         <div class="field address">
             <b>주소</b>
             <div>
-                <input type="text" placeholder="">
-                <input type="button" value="우편번호 검색">
+                <a class="placehold-text"><input type="text"></a>
             </div>
             <div>
                 <input type="text" placeholder="">
@@ -66,8 +55,14 @@
             </div>
         </div>
 
+        <!-- 5. 이메일_전화번호 -->
+        <div class="field">
+            <b>이메일</b>
+            <input type="email" placeholder="선택입력">
+        </div>
+
         <!-- 6. 가입하기 버튼 -->
-        <input type="submit" value="가입하기">
+        <input type="button" class="btn" value="Sign Up">
 
         <!-- 7. 푸터
         <div class="member-footer">
