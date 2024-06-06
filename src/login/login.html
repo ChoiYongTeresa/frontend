@@ -8,6 +8,7 @@
     <!-- CSS reset 및 연결 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="./login.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script type="module" src="./login.js"></script>
@@ -31,7 +32,7 @@
             </div>
             <div class="div">
                <h5>ID</h5>
-               <input type="text" class="input">
+               <input type="text" class="input" id="id">
             </div>
          </div>
          <div class="input-div pass">
@@ -40,14 +41,14 @@
             </div>
             <div class="div">
                <h5>Password</h5>
-               <input type="password" class="input">
+               <input type="password" class="input" id="pw">
             </div>
          </div>
          <div class="sub-div">
             <a href="./register.html" class="register">Register</a>
             <a href="#" class="findpw">Forgot Password?</a>
          </div>
-         <input type="submit" class="btn" value="Login" onClick="location.href='../mainpage/mainpage.html'">
+         <input type="button" id="loginbtn" class="btn" value="Login">
          </form>
       </div>
    </div>
