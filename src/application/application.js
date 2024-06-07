@@ -7,7 +7,7 @@ let centerlist = [
   {id:1, foodMarketName:"대전광역푸드뱅크", phoneNumber:"042-123-2134", address:"중구 보문로 246, 805호(대흥동)", detailAddress:"대전시 유성구대 660번길 3 층 다이셀"},
   {id:2, foodMarketName:"대전가톨릭농수산물지원센터", phoneNumber:"042-123-1234", address:"유성구 노은동로 33(노은동)", detailAddress:"어쩌고"}
 ];
-let selectedcenter = [];
+let selectedcenter = [1, 2];
 let userid = 1;
 
 
@@ -70,7 +70,7 @@ function toggleColor(element) {
     // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
     if (element.style.backgroundColor === 'white') {
       centerMapDiv.innerHTML = "";
-      selectedcenter.push(element)
+      // selectedcenter.push(element)
         element.style.backgroundColor = '#28995C'; // 초록색
         element.style.color = 'white'; // 텍스트 색상 변경
         
@@ -209,4 +209,36 @@ centerSort.addEventListener("change", () => {
       });
     }
   })
+})
+
+const applyBtn = document.querySelector('#applybtn');
+applyBtn.addEventListener("click", () => {
+  const id = window.localStorage.getItem("memberId");
+  const name = $('#username').val();
+  const phone = $('#userphone').val();
+  const email = $('#useremail').val();
+  // const production_list = items;
+  const production_list = [{product_category: 1, product_name: "햇반", product_num: 3, expiration_date: new Date(), product_storage: 1, product_url:""}]
+    // API 호출 함수
+    $.ajax({
+      url: "/donations/product/donation_form",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        id : id,
+        name : name,
+        phone : phone,
+        email : email,
+        product_list: production_list,
+        foodmarket_list: selectedcenter
+      }),
+      success: data => {
+        console.log("저장 성공")
+        console.log(data)
+      },
+      error: (e) => {
+        console.log("저장 실패")
+        console.error(e)
+      }
+    })
 })
