@@ -18,7 +18,7 @@ function onSubmit(e) {
         return;
     }
     $.ajax({
-      url: "/member/register/user",
+      url: "localhost:8080/member/register/user",
       type: "POST",
       data: {
         memberId: memberId,
@@ -29,12 +29,7 @@ function onSubmit(e) {
         address: address
       },
       success: data => {
-        // 틀린 경우 전달 뭘로받음? status네 값 뭐임
-        if(data == "false")
-          alert("잘못된 아이디이거나, 비밀번호가 틀렸습니다.")
-        else {
-          location.href = "./login.html"
-        }
+        location.href = "./login.html"
       },
       error: () => {
         console.error("회원가입 실패")
