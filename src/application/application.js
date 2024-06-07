@@ -8,29 +8,55 @@ let centerlist = [
   {id:2, foodMarketName:"대전가톨릭농수산물지원센터", phoneNumber:"042-123-1234", address:"유성구 노은동로 33(노은동)", detailAddress:"어쩌고"}
 ];
 let selectedcenter = [];
+let userid = 1;
 
 
 document.getElementById('upload-icon').addEventListener('click', function() {
-    document.getElementById('file-input').click();
-  });
+  document.getElementById('file-input').click();
+});
 
-  document.getElementById('file-input').addEventListener('change', function(event) {
-    const files = event.target.files;
-    imgs.push(files);
-    const container = document.getElementById('gallery-container');
-    
-    for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const imgElement = document.createElement('img');
-        imgElement.src = e.target.result;
-        imgElement.className = 'uploaded-img';
-        container.appendChild(imgElement);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('file-input').addEventListener('change', function(event) {
+  const files = event.target.files;
+  imgs.push(files);
+  const container = document.getElementById('gallery-container');
+  
+  for (const file of files) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgElement = document.createElement('img');
+      imgElement.src = e.target.result;
+      imgElement.className = 'uploaded-img';
+      container.appendChild(imgElement);
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
+const loadBtn = document.querySelector('#load');
+loadBtn.addEventListener("click", () => {
+  const memberId = 1;
+  // API 호출 함수
+	fetch("/member/summary/"+memberId)
+	.then(resp=>resp.json())
+	.then(data => {
+    const namediv = document.querySelector('#username');
+    const phonediv = document.querySelector('#userphone');
+    const emaildiv = document.querySelector('#useremail');
+    namediv.value = data.memberName;
+    phonediv.value = data.phoneNumber;
+    emaildiv.value = data.email;
+    userid = data.id;
+	})
+	.catch(error => {
+    console.log(error)
+    const namediv = document.querySelector('#username');
+    const phonediv = document.querySelector('#userphone');
+    const emaildiv = document.querySelector('#useremail');
+    namediv.value = "실패!";
+    phonediv.value = "실패!";
+    emaildiv.value = "실패!";
+	});
+})
   
 document.querySelectorAll('.center').forEach((center) => {
     center.addEventListener('click', function() {
