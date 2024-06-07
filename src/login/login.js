@@ -35,7 +35,7 @@ function onSubmit(e) {
         return;
     }
     $.ajax({
-      url: "/member/login/user",
+      url: "localhost:8080/member/login/user",
       type: "POST",
       data: {
         memberId: memberId,
