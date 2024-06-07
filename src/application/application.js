@@ -7,30 +7,56 @@ let centerlist = [
   {id:1, foodMarketName:"대전광역푸드뱅크", phoneNumber:"042-123-2134", address:"중구 보문로 246, 805호(대흥동)", detailAddress:"대전시 유성구대 660번길 3 층 다이셀"},
   {id:2, foodMarketName:"대전가톨릭농수산물지원센터", phoneNumber:"042-123-1234", address:"유성구 노은동로 33(노은동)", detailAddress:"어쩌고"}
 ];
-let selectedcenter = [];
+let selectedcenter = [1, 2];
+let userid = 1;
 
 
 document.getElementById('upload-icon').addEventListener('click', function() {
-    document.getElementById('file-input').click();
-  });
+  document.getElementById('file-input').click();
+});
 
-  document.getElementById('file-input').addEventListener('change', function(event) {
-    const files = event.target.files;
-    imgs.push(files);
-    const container = document.getElementById('gallery-container');
-    
-    for (const file of files) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const imgElement = document.createElement('img');
-        imgElement.src = e.target.result;
-        imgElement.className = 'uploaded-img';
-        container.appendChild(imgElement);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('file-input').addEventListener('change', function(event) {
+  const files = event.target.files;
+  imgs.push(files);
+  const container = document.getElementById('gallery-container');
+  
+  for (const file of files) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgElement = document.createElement('img');
+      imgElement.src = e.target.result;
+      imgElement.className = 'uploaded-img';
+      container.appendChild(imgElement);
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
+const loadBtn = document.querySelector('#load');
+loadBtn.addEventListener("click", () => {
+  const memberId = 1;
+  // API 호출 함수
+	fetch("/member/summary/"+memberId)
+	.then(resp=>resp.json())
+	.then(data => {
+    const namediv = document.querySelector('#username');
+    const phonediv = document.querySelector('#userphone');
+    const emaildiv = document.querySelector('#useremail');
+    namediv.value = data.memberName;
+    phonediv.value = data.phoneNumber;
+    emaildiv.value = data.email;
+    userid = data.id;
+	})
+	.catch(error => {
+    console.log(error)
+    const namediv = document.querySelector('#username');
+    const phonediv = document.querySelector('#userphone');
+    const emaildiv = document.querySelector('#useremail');
+    namediv.value = "실패!";
+    phonediv.value = "실패!";
+    emaildiv.value = "실패!";
+	});
+})
   
 document.querySelectorAll('.center').forEach((center) => {
     center.addEventListener('click', function() {
@@ -44,7 +70,7 @@ function toggleColor(element) {
     // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
     if (element.style.backgroundColor === 'white') {
       centerMapDiv.innerHTML = "";
-      selectedcenter.push(element)
+      // selectedcenter.push(element)
         element.style.backgroundColor = '#28995C'; // 초록색
         element.style.color = 'white'; // 텍스트 색상 변경
         
@@ -80,13 +106,25 @@ function toggleColor(element) {
 
 const itemputbtn = document.querySelector("#putbtn");
 itemputbtn.addEventListener("click", () => {
-  const curitem = {category:"", itemname:"", itemcount:"", expire:"", keepway:"", img:""};
+  const curitem = {category:"가공식품", itemname:"햇반", itemcount:"1개", expire:"2025년 1월 1일", keepway:"실온 보관", img:[]};
+  
   curitem.category = $('select[name="category"] > option:checked').text();
-  curitem.itemname = $('#itemname').val();
-  curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
-  curitem.expire = $('#expireY').val()+"년 "+$('#expireM').val()+"월 "+$('#expireD').val()+"일";
-  curitem.keepway = $('#store_way').val();
+  if ($('#itemname').val() != "") {
+    curitem.itemname = $('#itemname').val();
+  }
+  if ($('#itemcount').val() != "") {
+    curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
+  }
+  if ($('#expireY').val() != "") {
+    curitem.expire = $('#expireY').val()+"년 "+$('#expireM').val()+"월 "+$('#expireD').val()+"일";
+  }
+  if ($('#store_way').val() != undefined) {
+    curitem.keepway = $('#store_way').val();
+  }
   curitem.img = imgs;
+
+  // if (category != null)
+  console.log(curitem)
 
   const itemdiv = document.createElement('div');
   itemdiv.className = "submitted-item";
@@ -183,4 +221,36 @@ centerSort.addEventListener("change", () => {
       });
     }
   })
+})
+
+const applyBtn = document.querySelector('#applybtn');
+applyBtn.addEventListener("click", () => {
+  const id = window.localStorage.getItem("memberId");
+  const name = $('#username').val();
+  const phone = $('#userphone').val();
+  const email = $('#useremail').val();
+  // const production_list = items;
+  const production_list = [{product_category: 1, product_name: "햇반", product_num: 3, expiration_date: new Date(), product_storage: 1, product_url:""}]
+    // API 호출 함수
+    $.ajax({
+      url: "/donations/product/donation_form",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        id : id,
+        name : name,
+        phone : phone,
+        email : email,
+        product_list: production_list,
+        foodmarket_list: selectedcenter
+      }),
+      success: data => {
+        console.log("저장 성공")
+        console.log(data)
+      },
+      error: (e) => {
+        console.log("저장 실패")
+        console.error(e)
+      }
+    })
 })
