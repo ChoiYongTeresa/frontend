@@ -60,10 +60,22 @@
           <p>후원 물품 등록하기</p>
         </div>
 
+        <div class="field">
+          <div class="field-title">현재 등록한 물품 목록</div>
+          <div id="submitted">
+            <div id="not-submit"><p>물품을 등록해주세요.</p></div>
+            <!-- <div class="submitted-item">
+              햇반 (즉석밥류) | 2025년 1월 1일 | 실온보관 | 1개
+            </div>
+            <div class="submitted-item">
+              햇반 (즉석밥류) | 2025년 1월 1일 | 실온보관 | 1개
+            </div> -->
+          </div>
+        </div>
         <!-- 2. 필드 -->
         <div class="field">
             <div class="field-title">후원 물품 카테고리</div>
-            <select name="" id="">
+            <select name="category" id="category">
               <option value="1">가공식품</option>
               <option value="2">신선식품</option>
               <option value="3">일상용품</option>
@@ -78,23 +90,29 @@
         </div>
         <div class="field">
             <div class="field-title">후원 물품</div>
-            <input type="text" placeholder="햇반">
-            <input type="text" placeholder="1">
-            <select name="" id="">
-              <option value="">개</option>
-            </select>
+            <div class="hori-info">
+              <input type="text" id="itemname" placeholder="햇반">
+              <input type="text" id="itemcount" placeholder="1">
+              <select name="itemcountway" id="itemcountway">
+                <option value="">개</option>
+              </select>
+            </div>
+
         </div>
         <div class="field">
             <div class="field-title">후원 물품 유통기한</div>
-            <select name="" id="">
-              <option value=""></option>년
-            </select>
-            <select name="" id="">
-              <option value=""></option>월
-            </select>
-            <select name="" id="">
-              <option value=""></option>일
-            </select>
+            <div class="hori-info">
+              <select name="expireY" id="expireY">
+                <option value=""></option>년
+              </select>
+              <select name="expireM" id="expireM">
+                <option value=""></option>월
+              </select>
+              <select name="expireD" id="expireD">
+                <option value=""></option>일
+              </select>
+            </div>
+
         </div>
         <div class="field">
           <div class="field-title">후원 물품 보관 방법</div>
@@ -111,7 +129,7 @@
         </div>
 
         <div class="field item-btn">
-          <input type="button" value="물품 등록">
+          <input type="button" id="putbtn" value="물품 등록">
         </div>
         <!-- 6. 가입하기 버튼 -->
       </div>
@@ -122,23 +140,11 @@
         </div>
 
         <div class="field">
-          <select name="" id="">
+          <select name="centerSort" id="centerSort">
             <option value="">기부 물품이 가장 필요한 센터 순</option>
             <option value="">가까운 순</option>
           </select>
           <div class="center-list">
-            <div class="center">
-              <p>대전광역푸드뱅크</p>
-              <p>중구 보문로 246, 805호(대흥동)</p>
-            </div>
-            <div class="center">
-              <p>대전가톨릭농수산물지원센터</p>
-              <p>유성구 노은동로 33(노은동)</p>
-            </div>
-            <div class="center">
-              <p>사랑의먹거리나눔운동본부</p>
-              <p>중구 문창로 39(부사동)</p>
-            </div>
           </div>
           <div class="center-map"></div>
         </div>
@@ -149,7 +155,7 @@
       </div>
 
       <div class="field apply-btn">
-        <input type="button" value="제출하기" onClick="location.href='../mainpage.html'">
+        <input type="button" value="제출하기">
       </div>
     </div>
   </div>
