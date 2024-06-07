@@ -106,13 +106,25 @@ function toggleColor(element) {
 
 const itemputbtn = document.querySelector("#putbtn");
 itemputbtn.addEventListener("click", () => {
-  const curitem = {category:"", itemname:"", itemcount:"", expire:"", keepway:"", img:""};
+  const curitem = {category:"가공식품", itemname:"햇반", itemcount:"1개", expire:"2025년 1월 1일", keepway:"실온 보관", img:[]};
+  
   curitem.category = $('select[name="category"] > option:checked').text();
-  curitem.itemname = $('#itemname').val();
-  curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
-  curitem.expire = $('#expireY').val()+"년 "+$('#expireM').val()+"월 "+$('#expireD').val()+"일";
-  curitem.keepway = $('#store_way').val();
+  if ($('#itemname').val() != "") {
+    curitem.itemname = $('#itemname').val();
+  }
+  if ($('#itemcount').val() != "") {
+    curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
+  }
+  if ($('#expireY').val() != "") {
+    curitem.expire = $('#expireY').val()+"년 "+$('#expireM').val()+"월 "+$('#expireD').val()+"일";
+  }
+  if ($('#store_way').val() != undefined) {
+    curitem.keepway = $('#store_way').val();
+  }
   curitem.img = imgs;
+
+  // if (category != null)
+  console.log(curitem)
 
   const itemdiv = document.createElement('div');
   itemdiv.className = "submitted-item";
