@@ -1,3 +1,5 @@
+let memberId = "";
+
 $(document).ready(function(){
     $(".slider-ul").bxSlider({
         auto: true,             // 이미지 회전 자동
@@ -41,26 +43,48 @@ $(window).on("wheel", function(e){
 
 
 // 더미 데이터
-const dummyData = { items:"햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개" };
+let dummyData = { items:"햇반(1개),<br> 곰표밀가루(1kg)<br>외 4개" };
+let dummyStatus = 2;
 const subContentDiv = document.querySelector('.sub-content p');
 
-const memberid = "";
 // main 최근 기부내역 불러오기
-document.addEventListener('DOMContentLoaded', function() {
-	if (memberid == "") {
+document.addEventListener('DOMContentLoaded', async () => {
+
+	// 더미 데이터
+	localStorage.setItem("memberId", 1);
+	
+	memberId = localStorage.getItem("memberId")
+	if (memberId == "") {
 		subContentDiv.innerHTML = "로그인해주세요.";
 		return;
 	}
+
     // API 호출 함수
-	fetch("/donations/"+memberid)
+	await fetch("/donations/"+memberId)
+	.then(response => {
+	  if (!response.ok) {
+		throw new Error(` ${response.status} 요청 실패`);
+	  }
+	  return response.json();
+	})
 	.then(resp=>resp.json())
 	.then(data => {
-		subContentDiv.innerHTML = data.items;
+		dummyData = data.items;
+		dummyStatus = data.status;
 		// API 필드 이름으로 수정해야함.
 	})
 	.catch(error => {
 		console.error('Error fetching data:', error)
-		console.log(dummyData)
 		subContentDiv.innerHTML = dummyData.items;
 	});
+
+	subContentDiv.innerHTML = dummyData.items;
+	const circles = document.querySelectorAll('.circle');
+	for (let i = 0; i<4; i++) {
+		if (i === dummyStatus) {
+			circles[i].className = "circle active"
+		} else {
+			circles[i].className = "circle"
+		}
+	}
 });
