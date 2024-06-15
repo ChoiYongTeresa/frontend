@@ -88,3 +88,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 	}
 });
+
+/*
+그래프
+*/
+window.onload = async () => {
+
+	const areas = ["서구", "동구", "대덕구", "유성구", "중구"]
+	
+	for (let area of areas) {
+		// API 호출 함수
+		await fetch(`/donations/statistics?area=${area}`)
+		.then(response => {
+		if (!response.ok) {
+			throw new Error(` ${response.status} 요청 실패`);
+		}
+		return response.json();
+		})
+		.then(resp=>resp.json())
+		.then(data => {
+		})
+		.catch(error => {
+			console.error('Error fetching data:', error)
+		});
+	}
+}
