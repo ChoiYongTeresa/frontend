@@ -171,6 +171,15 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     gap:10px;
 }
 
+.field .howtokeep-info {
+    width: 100%;
+    justify-content: start;
+    display: flex;
+}
+.field .howtokeep-info .way-info {
+    margin-right: 50px;
+}
+
 .application input:not(input[type=radio], input[type=checkbox]), .application select{
     border: 1px solid #dadada;
     padding: 15px;
@@ -200,7 +209,6 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     font-size: 17px;
     cursor: pointer;
 }
-
 
 #gallery-container {
     display: flex;
@@ -258,3 +266,21 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     }
 }
 /* 출처: https://j-ungry.tistory.com/322 [정구리의 우주정복:티스토리] */
+
+.center-map {
+    width: 100%;
+    margin: 10px 0;
+}
+.center-map h2 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.center-map img {
+    width: 100%;
+}
+.center-map p {
+    text-align: left;
+    font-size: 15px;
+}

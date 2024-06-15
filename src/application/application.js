@@ -3,7 +3,7 @@ let imgs = [];
 let items = [];
 let totalItemCount = []
 let centerlist = [
-  {id:1, foodMarketName:"대전광역푸드뱅크", phoneNumber:"042-123-2134", address:"중구 보문로 246, 805호(대흥동)", detailAddress:"대전시 유성구대 660번길 3 층 다이셀"},
+  {id:1, foodMarketName:"실패뱅크", phoneNumber:"042-123-2134", address:"실패구 실패동 실패로", detailAddress:"실패디테일주소"},
 ];
 let selectedcenter = [1, 2];
 const memberId = localStorage.getItem("memberId");
@@ -70,17 +70,19 @@ document.querySelector('#load').addEventListener("click", async () => {
 물품 등록하기
 */
 document.querySelector("#putbtn").addEventListener("click", () => {
+
   const curitem = {category:"가공식품", itemname:"햇반", itemcount:"1개", expire:"2025-1-1", howtokeep:[], img:[]};
   
   curitem.category = $('select[name="category"] > option:checked').text();
+  
   if ($('#itemname').val() != "") {
     curitem.itemname = $('#itemname').val();
   }
   if ($('#itemcount').val() != "") {
     curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
   }
-  if ($('#expireY').val() != "") {
-    curitem.expire = $('#expireY').val()+"-"+$('#expireM').val()+"-"+$('#expireD').val();
+  if ($('#expire').val() != null) {
+    curitem.expire = $('#expire').val();
   }
   const howtokeepEls = document.querySelectorAll('input[name="howtokeep"]:checked')
   if (howtokeepEls.length != 0) {
@@ -188,8 +190,7 @@ centerSort.addEventListener("change", async () => {
     });
     centerDiv.append(nameP, addrP)
     centerDiv.on('click', (e) => {
-      console.log("클릭")
-      toggleColor(e.currentTarget);
+      toggleColor(e.currentTarget, center);
     })
     centerListdiv.append(centerDiv)
   }
@@ -198,9 +199,9 @@ centerSort.addEventListener("change", async () => {
 /*
 센터 클릭 시 상세정보 확인
 */
-function toggleColor(element) {
-
+function toggleColor(element, center) {
   const centerMapDiv = document.querySelector('.center-map')
+
   // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
   if (element.style.backgroundColor === 'white') {
     centerMapDiv.innerHTML = "";
@@ -210,7 +211,7 @@ function toggleColor(element) {
       
       // Create and append the title
       const title = document.createElement('h2');
-      title.textContent = '대전 가볼만한 공식 지원센터';
+      title.textContent = center.foodMarketName;
       centerMapDiv.appendChild(title);
 
       // Create and append the map image
@@ -221,12 +222,12 @@ function toggleColor(element) {
 
       // Create and append the address info
       const address = document.createElement('p');
-      address.textContent = '대전시 유성구대 660번길 3 층 다이셀';
+      address.textContent = center.detailAddress;
       centerMapDiv.appendChild(address);
 
       // Create and append the phone number
       const phone = document.createElement('p');
-      phone.textContent = '042-123-2134';
+      phone.textContent = center.phoneNumber;
       centerMapDiv.appendChild(phone);
   } else {
       element.style.backgroundColor = 'white'; // 하얀색

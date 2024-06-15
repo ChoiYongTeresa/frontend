@@ -102,23 +102,23 @@
         <div class="field">
             <div class="field-title">후원 물품 유통기한</div>
             <div class="hori-info">
-              <select name="expireY" id="expireY">
-                <option value=""></option>년
-              </select>
-              <select name="expireM" id="expireM">
-                <option value=""></option>월
-              </select>
-              <select name="expireD" id="expireD">
-                <option value=""></option>일
-              </select>
+              <input type="date" id="expire">
             </div>
 
         </div>
         <div class="field">
           <div class="field-title">후원 물품 보관 방법</div>
-          <input type="checkbox" name="howtokeep" value="실온 보관">실온 보관
-          <input type="checkbox" name="howtokeep" value="냉장 보관">냉장 보관
-          <input type="checkbox" name="howtokeep" value="냉동 보관">냉동 보관
+          <div class="howtokeep-info">
+            <div class="way-info">
+              <input type="checkbox" name="howtokeep" value="실온 보관">  실온 보관
+            </div>
+            <div class="way-info">
+              <input type="checkbox" name="howtokeep" value="냉장 보관">  냉장 보관
+            </div>
+            <div class="way-info">
+              <input type="checkbox" name="howtokeep" value="냉동 보관">  냉동 보관
+            </div>
+          </div>
         </div>
         <div class="field">
           <div class="field-title">물품사진</div>
