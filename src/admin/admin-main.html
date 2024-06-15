@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS reset 및 연결 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- bxSlider (이미지 슬라이더) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- JQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script> -->
+    <script type="text/javascript">   
+      $(document).ready( function() { $("#headers").load("../header-admin.html"); });
+    </script>
+    <link rel="stylesheet" href="admin-main.css">
+    <script type="module" src="./admin-main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <!-- HEADER -->
+  <div id="headers"></div>
+
+<div class="mainpage">
+  <div class="content">
+    <div class="content-section">
+      <div class="sub-section">
+        <div class="sub-container">
+          <button class="sub-submit-button" onClick="location.href='./approval-list.html'">기부물품 승인 현황</button>
+        </div>
+      </div>
+
+      <div class="btn-section">
+        <div class="btn-container">
+          <div class="btn-content">
+            <p>대전메롱메롱센터<br>관리자 페이지입니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
