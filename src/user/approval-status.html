@@ -1,252 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="approval-status.css">
-        <!-- Google Material Icons -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-        <!-- JQuery -->
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-        <script type="text/javascript">   
-          $(document).ready( function() { $("#headers").load("../header.html"); });
-        </script>
-        <script src="approval-status.js" defer></script>
-    </head>
-    <body>
-        <!-- HEADER -->
-        <div id="headers"></div>
-        <div class="container-main">
-            <div class="container-title">
-                <div class="title">
-                    <h1>밀가루 1개, 참치 2개</h1>
-                </div>
-                <div class="author">
-                    <p>조단현</p>
-                </div>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="approval-status.css">
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">   
+        $(document).ready( function() { $("#headers").load("../header.html"); });
+    </script>
+    <script src="approval-status.js" defer></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="headers"></div>
+    <div class="container-main">
+        <header class="container-title">
+            <h2 id="donation-title" class="title"></h2>
+            <p id="author-name" class="author"></p>
+        </header>
+        <div class="container-center">
+            <div class="center-info">
+                <h3 id="center-name" class="center-title"></h3>
+                <p id="center-address" class="center-address"></p>
             </div>
-            <div class="container-item-list">
-                <div class="container-center">
-                    <div class="center-info">
-                        <div class="center-title">
-                            <h3>대전광역푸드뱅크</h3>
-                        </div>
-                        <div class="center-address">
-                            <p>중구 보문로 246, 805호 대흥동</p>
-                        </div>
-                    </div>
-                    <div class="container-checkbox">
-                        <input type="checkbox" id="center1" name="center1" value="center1">
-                    </div>
-                </div>
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/flour.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>곰표 밀가루</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>10kg</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>4개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2023-12-15</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>실온</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="approval-status">
-                        <h1 class="approved">승인 완료</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="container-item-list">
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/tuna.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>동원참치</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>100g</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2027-02-25</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>냉장</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="approval-status">
-                        <h1 class="approved">승인 완료</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="container-item-list">
-                <div class="container-center">
-                    <div class="center-info">
-                        <div class="center-title">
-                            <h3>대전가톨릭농수산물지원센터</h3>
-                        </div>
-                        <div class="center-address">
-                            <p>유성구 노은동로33, 노은동</p>
-                        </div>
-                    </div>
-                    <div class="container-checkbox">
-                        <input type="checkbox" id="center1" name="center1" value="center1">
-                    </div>
-                </div>
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/flour.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>곰표 밀가루</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>10kg</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>4개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2023-12-15</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>실온</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="approval-status">
-                        <h1 class="approved">승인 완료</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="container-item-list">
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/tuna.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>동원참치</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>100g</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2027-02-25</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>냉장</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="approval-status">
-                        <h1 class="approved">승인 거부</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="container-save">
-                <div class="container-save-button">
-                    <button class="button save">저장하기</button>
-                </div>
-                <div class="container-save-button">
-                    <button class="button back">뒤로가기</button>
-                </div>
+            <div class="container-checkbox">
             </div>
         </div>
-    </body>
+
+        <section id="item-list" class="container-item-list">
+        </section>
+
+        <div class="container-save">
+            <div class="container-save-button">
+                <button class="button save">저장하기</button>
+            </div>
+            <div class="container-save-button">
+                <button class="button back">뒤로가기</button>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

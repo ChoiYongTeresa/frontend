@@ -100,3 +100,24 @@ const saveItemsToServer = async () => {
         console.error('Error saving items:', error);
     }
 }
+
+/*
+const saveItemsToServer = async (itemName) => {
+    try {
+        const foodmarketId = 1; // 실제 값으로 변경 필요
+
+        await fetch(`/admin/donations/${foodmarketId}/banned_product`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                foodmarket_id: foodmarketId,
+                significant: itemName
+            })
+        });
+    } catch (error) {
+        console.error('Error saving items:', error);
+    }
+}
+*/

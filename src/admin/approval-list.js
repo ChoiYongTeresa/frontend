@@ -1,27 +1,32 @@
-// approval-list.js
-
-// 더미 데이터 정의 (더 많은 항목 추가)
-const dummyData = [
-    { no: 1, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    { no: 2, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    { no: 3, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 4, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 5, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 6, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 7, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 8, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 9, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 10, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 11, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 12, title: "계란 30개", author: "서은서", status: "반려" },
-];
-
+const API_URL = '/admin/donations/requestList';
+const foodmarketId = 1; // foodmarket_id를 설정
 const itemsPerPage = 10;
 let currentPage = 1;
 
 window.onload = function() {
-    displayList(dummyData, itemsPerPage, currentPage);
-    setupPagination(dummyData, itemsPerPage);
+    fetchDonationRequests(foodmarketId).then(data => {
+        displayList(data, itemsPerPage, currentPage);
+        setupPagination(data, itemsPerPage);
+    }).catch(error => {
+        console.error('Error fetching donation requests:', error);
+        alert('기부 신청 리스트를 불러오는데 실패했습니다.');
+    });
+}
+
+function fetchDonationRequests(foodmarketId) {
+    return fetch(`${API_URL}?foodmarket_id=${foodmarketId}`)
+        .then(response => response.json())
+        .then(data => data.map((item, index) => ({
+            no: index + 1,
+            donationId: item.donation_id,
+            title: `기부 신청 ${item.donation_id}`,
+            author: item.user_id,
+            status: "승인 대기" // status 받아와야 함...
+        })))
+        .catch(error => {
+            console.error('Error fetching donation requests:', error);
+            throw error;
+        });
 }
 
 function displayList(items, itemsPerPage, page) {
@@ -41,7 +46,10 @@ function displayList(items, itemsPerPage, page) {
         row.appendChild(cellNo);
         
         const cellTitle = document.createElement('td');
-        cellTitle.textContent = item.title;
+        const titleLink = document.createElement('a');
+        titleLink.href = `/donation/details/${item.donationId}`;
+        titleLink.textContent = item.title;
+        cellTitle.appendChild(titleLink);
         row.appendChild(cellTitle);
         
         const cellAuthor = document.createElement('td');
@@ -84,7 +92,7 @@ function paginationButton(page, items) {
         displayList(items, itemsPerPage, currentPage);
 
         const currentBtn = document.querySelector('.pagination button.active');
-        currentBtn.classList.remove('active');
+        if (currentBtn) currentBtn.classList.remove('active');
 
         button.classList.add('active');
     });

@@ -1,123 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="item-select.css">
-        <script src="item-select.js" defer></script>
-    </head>
-    <body>
-        <div class="container-main">
-            <div class="container-title">
-                <div class="title">
-                    <h1>밀가루 1개, 참치 2개</h1>
-                </div>
-                <div class="author">
-                    <p>조단현</p>
-                </div>
-            </div>
-            <div class="container-item-list">
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/flour.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>곰표 밀가루</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>10kg</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>4개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2023-12-15</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>실온</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-button">
-                        <button class="button select">선택하기</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container-item-list">
-                <div class="container-item">
-                    <div class="item-image">
-                        <img src="../assets/tuna.png">
-                    </div>
-                    <div class="container-item-info">
-                        <div class="item-name">
-                            <p>동원참치</p>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>무게</p>
-                            </div>
-                            <div class="class-value">
-                                <p>100g</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>개수</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2개</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>유통기한</p>
-                            </div>
-                            <div class="class-value">
-                                <p>2027-02-25</p>
-                            </div>
-                        </div>
-                        <div class="container-info-class">
-                            <div class="class-name">
-                                <p>보관 방법</p>
-                            </div>
-                            <div class="class-value">
-                                <p>냉장</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-button">
-                        <button class="button cancel">취소하기</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container-approval">
-                <div class="container-approval-button">
-                    <button class="button approval">승인하기</button>
-                </div>
-                <div class="container-approval-button">
-                    <button class="button reject">뒤로가기</button>
-                </div>
-            </div>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="item-select.css">
+    <script src="item-select.js" defer></script>
+</head>
+<body>
+    <div class="container-main">
+        <header class="container-title">
+            <h2 class="title">기부 물품 목록</h2>
+            <p class="author"></p>
+        </header>
+        <section class="container-item-list">
+            <!-- 아이템들이 여기에 동적으로 삽입됩니다 -->
+        </section>
+        <div class="container-approval">
+            <button class="button approval">승인하기</button>
+            <button class="button reject">뒤로가기</button>
         </div>
-    </body>
+    </div>
+</body>
 </html>
