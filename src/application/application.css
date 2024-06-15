@@ -171,6 +171,15 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     gap:10px;
 }
 
+.field .howtokeep-info {
+    width: 100%;
+    justify-content: start;
+    display: flex;
+}
+.field .howtokeep-info .way-info {
+    margin-right: 50px;
+}
+
 .application input:not(input[type=radio], input[type=checkbox]), .application select{
     border: 1px solid #dadada;
     padding: 15px;
@@ -201,7 +210,6 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     cursor: pointer;
 }
 
-
 #gallery-container {
     display: flex;
     overflow-x: auto;
@@ -219,7 +227,8 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     align-items: center;
     cursor: pointer;
     margin-right: 10px;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23E91E63" d="M19 13H5v-2h14v2zm-2-8h-4V3h4v2zm3 0v2h-3V5h3zM12 7L9.5 9.5 12 12l-2.5 2.5L7 12l2.5-2.5L7 7l2.5-2.5L12 7zm0 3.5L14.5 12 12 14.5 9.5 12 12 9.5zM15 3h2v2h-2V3zm4 0v2h-2V3h2zM3 5h2v2H3V5zm2 10H3v-2h2v2zm-2-4V9h2v2H3zm0 6h2v2H3v-2zm18 0h-2v2h2v-2zm-4 2v-2h2v2h-2zm0-12V5h2v2h-2z"/></svg>');
+    background-image: url('../assets/file.png');
+    background-size: 30px;
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -257,3 +266,21 @@ header .navbar .navbar-menu ul.menu li.donation-menu ul.submenu li.submenu-list 
     }
 }
 /* 출처: https://j-ungry.tistory.com/322 [정구리의 우주정복:티스토리] */
+
+.center-map {
+    width: 100%;
+    margin: 10px 0;
+}
+.center-map h2 {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.center-map img {
+    width: 100%;
+}
+.center-map p {
+    text-align: left;
+    font-size: 15px;
+}
