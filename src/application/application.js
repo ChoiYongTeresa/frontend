@@ -1,5 +1,5 @@
 let userInfo = {name:"김실패", phone:"공일공-실실실실-패패패패", email:"실패@실패.com"};
-let imgs = [];
+let imgs = new FormData();
 let items = [];
 let totalItemCount = []
 let centerlist = [
@@ -17,14 +17,15 @@ document.getElementById('upload-icon').addEventListener('click', function() {
 
 document.getElementById('file-input').addEventListener('change', function(event) {
   const files = event.target.files;
-  imgs.push(files);
   const container = document.getElementById('gallery-container');
-  
+
   for (const file of files) {
     const reader = new FileReader();
     reader.onload = function(e) {
       const imgElement = document.createElement('img');
-      imgElement.src = e.target.result;
+      const src = e.target.result;
+      imgs.push({name: file.name, src: src});
+      imgElement.src = src;
       imgElement.className = 'uploaded-img';
       container.appendChild(imgElement);
     };
@@ -91,7 +92,6 @@ document.querySelector("#putbtn").addEventListener("click", () => {
     });
   }
   curitem.img = imgs;
-
   const itemdiv = document.createElement('div');
   itemdiv.className = "submitted-item";
   const text = curitem.itemname + " (" + curitem.category + ") | " + curitem.expire + " | "
