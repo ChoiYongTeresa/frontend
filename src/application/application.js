@@ -1,16 +1,16 @@
+let userInfo = {name:"김실패", phone:"공일공-실실실실-패패패패", email:"실패@실패.com"};
 let imgs = [];
 let items = [];
-let sort_type = 1;
-let address = {};
-let total_item_count = []
+let totalItemCount = []
 let centerlist = [
   {id:1, foodMarketName:"대전광역푸드뱅크", phoneNumber:"042-123-2134", address:"중구 보문로 246, 805호(대흥동)", detailAddress:"대전시 유성구대 660번길 3 층 다이셀"},
-  {id:2, foodMarketName:"대전가톨릭농수산물지원센터", phoneNumber:"042-123-1234", address:"유성구 노은동로 33(노은동)", detailAddress:"어쩌고"}
 ];
 let selectedcenter = [1, 2];
-let userid = 1;
+const memberId = localStorage.getItem("memberId");
 
-
+/*
+물품 사진 입력
+*/
 document.getElementById('upload-icon').addEventListener('click', function() {
   document.getElementById('file-input').click();
 });
@@ -32,81 +32,45 @@ document.getElementById('file-input').addEventListener('change', function(event)
   }
 });
 
-const loadBtn = document.querySelector('#load');
-loadBtn.addEventListener("click", () => {
-  const memberId = 1;
-  // API 호출 함수
-	fetch("/member/summary/"+memberId)
-	.then(resp=>resp.json())
+/*
+내 정보 불러오기
+*/
+document.querySelector('#load').addEventListener("click", async () => {
+
+  const requestData = JSON.stringify({ memberId: memberId });
+
+  // Fetch API 호출
+	await fetch("/member/summary/"+memberId, {
+    method: "GET",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: requestData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(` ${response.status} 요청 실패`);
+    }
+    return response.json();
+  })
 	.then(data => {
-    const namediv = document.querySelector('#username');
-    const phonediv = document.querySelector('#userphone');
-    const emaildiv = document.querySelector('#useremail');
-    namediv.value = data.memberName;
-    phonediv.value = data.phoneNumber;
-    emaildiv.value = data.email;
-    userid = data.id;
+    userInfo.name = data.memberName;
+    userInfo.phone = data.phoneNumber;
+    userInfo.email = data.email;
 	})
 	.catch(error => {
-    console.log(error)
-    const namediv = document.querySelector('#username');
-    const phonediv = document.querySelector('#userphone');
-    const emaildiv = document.querySelector('#useremail');
-    namediv.value = "실패!";
-    phonediv.value = "실패!";
-    emaildiv.value = "실패!";
-	});
-})
-  
-document.querySelectorAll('.center').forEach((center) => {
-    center.addEventListener('click', function() {
-        toggleColor(this);
-    });
+    console.error(error)
+    alert("로그인해주세요.")
   });
 
-const centerMapDiv = document.querySelector('.center-map')
+  document.querySelector('#username').value = userInfo.name;
+  document.querySelector('#userphone').value = userInfo.phone;
+  document.querySelector('#useremail').value = userInfo.email;
+});
 
-function toggleColor(element) {
-    // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
-    if (element.style.backgroundColor === 'white') {
-      centerMapDiv.innerHTML = "";
-      // selectedcenter.push(element)
-        element.style.backgroundColor = '#28995C'; // 초록색
-        element.style.color = 'white'; // 텍스트 색상 변경
-        
-        // Create and append the title
-        const title = document.createElement('h2');
-        title.textContent = '대전 가볼만한 공식 지원센터';
-        centerMapDiv.appendChild(title);
-
-        // Create and append the map image
-        const mapImage = document.createElement('img');
-        mapImage.src = '../assets/map_dummy.png'; // Replace with your actual image URL
-        mapImage.alt = '지도 이미지';
-        centerMapDiv.appendChild(mapImage);
-
-        // Create and append the address info
-        const address = document.createElement('p');
-        address.textContent = '대전시 유성구대 660번길 3 층 다이셀';
-        centerMapDiv.appendChild(address);
-
-        // Create and append the phone number
-        const phone = document.createElement('p');
-        phone.textContent = '042-123-2134';
-        centerMapDiv.appendChild(phone);
-    } else {
-        element.style.backgroundColor = 'white'; // 하얀색
-        element.style.color = 'black'; // 텍스트 색상을 검은색으로 변경
-        
-        centerMapDiv.innerHTML = ""
-
-    }
-}
-
-
-const itemputbtn = document.querySelector("#putbtn");
-itemputbtn.addEventListener("click", () => {
-  const curitem = {category:"가공식품", itemname:"햇반", itemcount:"1개", expire:"2025년 1월 1일", keepway:"실온 보관", img:[]};
+/*
+물품 등록하기
+*/
+document.querySelector("#putbtn").addEventListener("click", () => {
+  const curitem = {category:"가공식품", itemname:"햇반", itemcount:"1개", expire:"2025-1-1", howtokeep:[], img:[]};
   
   curitem.category = $('select[name="category"] > option:checked').text();
   if ($('#itemname').val() != "") {
@@ -116,21 +80,20 @@ itemputbtn.addEventListener("click", () => {
     curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
   }
   if ($('#expireY').val() != "") {
-    curitem.expire = $('#expireY').val()+"년 "+$('#expireM').val()+"월 "+$('#expireD').val()+"일";
+    curitem.expire = $('#expireY').val()+"-"+$('#expireM').val()+"-"+$('#expireD').val();
   }
-  if ($('#store_way').val() != undefined) {
-    curitem.keepway = $('#store_way').val();
+  const howtokeepEls = document.querySelectorAll('input[name="howtokeep"]:checked')
+  if (howtokeepEls.length != 0) {
+    howtokeepEls.forEach((el) => {
+      curitem.howtokeep.push(el.value)
+    });
   }
   curitem.img = imgs;
 
-  // if (category != null)
-  console.log(curitem)
-
   const itemdiv = document.createElement('div');
   itemdiv.className = "submitted-item";
-  console.log(items);
   const text = curitem.itemname + " (" + curitem.category + ") | " + curitem.expire + " | "
-              + curitem.keepway + " | " + curitem.itemcount;
+              + curitem.howtokeep + " | " + curitem.itemcount;
   itemdiv.innerHTML = text;
 
   const putdiv = document.querySelector('#submitted');
@@ -139,118 +102,184 @@ itemputbtn.addEventListener("click", () => {
     childp.style.display = "none";
   }
   items.push(curitem);
+
   let flag = 1;
-  for (let i of total_item_count) {
+  for (let i of totalItemCount) {
     if (i.category == curitem.category) {
       i.count += parseInt($('#itemcount').val());
       flag = 2;
       break;
     }
   }
-  if (flag == 1) {
-    total_item_count.push({category: curitem.category, count:parseInt($('#itemcount').val())})
-  }
-  console.log(total_item_count);
+  if (flag == 1)
+    totalItemCount.push({category: curitem.category, count:parseInt($('#itemcount').val())})
+
   putdiv.appendChild(itemdiv);
   imgs = [];
+
 })
 
+/*
+푸드마켓 정렬
+*/
 const centerSort = document.querySelector('#centerSort');
-centerSort.addEventListener("change", () => {
-  const curSelect = $('select[name="centerSort"] > option:checked').index();
-  sort_type = curSelect;
-  navigator.geolocation.getCurrentPosition((position) => {
+centerSort.addEventListener("change", async () => {
+
+  // 정렬 기준 선택하는 드롭박스
+  const centerSortType = $('select[name="centerSort"] > option:checked').value;
+  // 클라이언트의 현재 위치
+  const address = { latitude: 0, longitude:0 };
+  navigator.geolocation.getCurrentPosition(position => {
     address = {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     };
   });
-  // API 호출 함수
-  $.ajax({
-    url: "/donations/center/readAll",
-    type: "GET",
-    data: {
-      sort_type: sort_type,
-      address: address,
-      foodList: total_item_count
-    },
-    success: data => {
-      centerlist = data;
-      const centerListdiv = document.querySelector('.center-list');
-      centerListdiv.innerHTML = "";
 
-      for (let i of centerlist) {
-        const centerdiv = document.createElement('div');
-        centerdiv.className = "center";
-        const p1 = document.createElement('p');
-        p1.innerHTML = i.foodMarketName;
-        const p2 = document.createElement('p');
-        p2.innerHTML = i.address;
-        centerdiv.appendChild(p1, p2);
-        centerListdiv.appendChild(centerdiv);
-      }
-
-      centerListdiv.childNodes.forEach((center) => {
-        center.addEventListener('click', function() {
-            toggleColor(this);
-        });
-      });
-
-    },
-    error: () => {
-      console.error("기부 신청서 API 연결 실패");
-      const centerListdiv = document.querySelector('.center-list');
-      centerListdiv.innerHTML = "";
-
-      for (let i of centerlist) {
-        const centerdiv = document.createElement('div');
-        centerdiv.className = "center";
-        const p1 = document.createElement('p');
-        p1.innerHTML = i.foodMarketName;
-        const p2 = document.createElement('p');
-        p2.innerHTML = i.address;
-        centerdiv.appendChild(p1);
-        centerdiv.appendChild(p2);
-        centerListdiv.appendChild(centerdiv);
-      }
-      
-      centerListdiv.childNodes.forEach((center) => {
-        center.addEventListener('click', function() {
-            toggleColor(this);
-        });
-      });
-    }
+  const requestData = JSON.stringify({
+    sort_type: centerSortType,
+    latitude: address.latitude,
+    longitude: address.longitude,
+    foodList: totalItemCount
   })
-})
 
+  // Fetch API 호출
+  // Response API
+  // {
+  //   id : long 
+  //   rank : int 
+  //   foodMarketName : str
+  //   phoneNumber : str
+  //   address : str
+  //   detailAddress : str
+  // }
+  centerlist = await fetch("/donations/center/readAll", {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: requestData
+  })
+  // fetch는 요청 자체가 실패한 경우를 제외하고선 catch로 error가 넘어가지 않음
+  // => 꼭 response를 받아오는 첫번째 요청에서 response.ok로 error를 확인 및 넘긴 후
+  // catch에서 잡아오도록
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(` ${response.status} 요청 실패`);
+    }
+    return response.json();
+  })
+  .then(data => data)
+  .catch(error => {
+    console.error(`기부 신청서 API 연결 실패 : ${error}`);
+    return centerlist;
+  });
+  
+  const centerListdiv = $('.center-list');
+  centerListdiv.empty();
+  for (let center of centerlist) {
+    const centerDiv = $('<div>', {
+      "class": 'center',
+      style: "background-color: white"
+    })
+    const nameP = $('<p>', {
+      text: center.foodMarketName
+    });
+    const addrP = $('<p>', {
+      text: center.address
+    });
+    centerDiv.append(nameP, addrP)
+    centerDiv.on('click', (e) => {
+      console.log("클릭")
+      toggleColor(e.currentTarget);
+    })
+    centerListdiv.append(centerDiv)
+  }
+});
+
+/*
+센터 클릭 시 상세정보 확인
+*/
+function toggleColor(element) {
+
+  const centerMapDiv = document.querySelector('.center-map')
+  // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
+  if (element.style.backgroundColor === 'white') {
+    centerMapDiv.innerHTML = "";
+    // selectedcenter.push(element)
+      element.style.backgroundColor = '#28995C'; // 초록색
+      element.style.color = 'white'; // 텍스트 색상 변경
+      
+      // Create and append the title
+      const title = document.createElement('h2');
+      title.textContent = '대전 가볼만한 공식 지원센터';
+      centerMapDiv.appendChild(title);
+
+      // Create and append the map image
+      const mapImage = document.createElement('img');
+      mapImage.src = '../assets/map_dummy.png'; // Replace with your actual image URL
+      mapImage.alt = '지도 이미지';
+      centerMapDiv.appendChild(mapImage);
+
+      // Create and append the address info
+      const address = document.createElement('p');
+      address.textContent = '대전시 유성구대 660번길 3 층 다이셀';
+      centerMapDiv.appendChild(address);
+
+      // Create and append the phone number
+      const phone = document.createElement('p');
+      phone.textContent = '042-123-2134';
+      centerMapDiv.appendChild(phone);
+  } else {
+      element.style.backgroundColor = 'white'; // 하얀색
+      element.style.color = 'black'; // 텍스트 색상을 검은색으로 변경
+      
+      centerMapDiv.innerHTML = ""
+
+      }
+  }
+  
+
+/*
+신청서 최종 제출
+*/
 const applyBtn = document.querySelector('#applybtn');
-applyBtn.addEventListener("click", () => {
-  const id = window.localStorage.getItem("memberId");
+applyBtn.addEventListener("click", async () => {
   const name = $('#username').val();
   const phone = $('#userphone').val();
   const email = $('#useremail').val();
-  // const production_list = items;
-  const production_list = [{product_category: 1, product_name: "햇반", product_num: 3, expiration_date: new Date(), product_storage: 1, product_url:""}]
-    // API 호출 함수
-    $.ajax({
-      url: "/donations/product/donation_form",
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({
-        id : id,
-        name : name,
-        phone : phone,
-        email : email,
-        product_list: production_list,
-        foodmarket_list: selectedcenter
-      }),
-      success: data => {
-        console.log("저장 성공")
-        console.log(data)
-      },
-      error: (e) => {
-        console.log("저장 실패")
-        console.error(e)
-      }
-    })
+
+  const requestData = JSON.stringify({
+    id: memberId,
+    name: name,
+    phone: phone,
+    email: email,
+    product_list: items.map(product => ({
+      product_category: product.category,
+      product_name: product.itemname,
+      product_num: product.itemcount,
+      expiration_date: product.expire,
+      product_storage: product.howtokeep,
+      product_url: product.imgs
+    })),
+    foodmarket_list: selectedcenter
+  })
+
+  // Fetch API 호출
+  await fetch("/donations/product/donation_form", {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: requestData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(` ${response.status} 요청 실패`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(`기부 신청서 저장 성공 : ${data}`)
+  })
+  .catch(error => {
+    console.error(`기부 신청서 저장 실패 : ${error}`);
+    return centerlist;
+  });
 })

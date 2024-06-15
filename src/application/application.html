@@ -116,9 +116,9 @@
         </div>
         <div class="field">
           <div class="field-title">후원 물품 보관 방법</div>
-          <input type="checkbox" name="store_way" value="roomT">실온 보관
-          <input type="checkbox" name="store_way" value="refriT">냉장 보관
-          <input type="checkbox" name="store_way" value="frozT">냉동 보관
+          <input type="checkbox" name="howtokeep" value="실온 보관">실온 보관
+          <input type="checkbox" name="howtokeep" value="냉장 보관">냉장 보관
+          <input type="checkbox" name="howtokeep" value="냉동 보관">냉동 보관
         </div>
         <div class="field">
           <div class="field-title">물품사진</div>
@@ -141,8 +141,9 @@
 
         <div class="field">
           <select name="centerSort" id="centerSort">
-            <option value="">가까운 순</option>
-            <option value="">기부 물품이 가장 필요한 센터 순</option>
+            <option selected disabled hidden>센터 정렬 기준을 선택해주세요.</option>
+            <option value="1">가까운 순</option>
+            <option value="2">기부 물품이 가장 필요한 센터 순</option>
           </select>
           <div class="center-list">
           </div>
