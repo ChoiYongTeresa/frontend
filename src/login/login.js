@@ -1,6 +1,5 @@
 const inputs = document.querySelectorAll(".input");
 
-
 function addcl(){
   let parent = this.parentNode.parentNode;
   parent.classList.add("focus");
@@ -13,7 +12,6 @@ function remcl(){
   }
 }
 
-
 inputs.forEach(input => {
   input.addEventListener("focus", addcl);
   input.addEventListener("blur", remcl);
@@ -21,7 +19,7 @@ inputs.forEach(input => {
 
 //Source :- https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/avatar.svg
 
-function onSubmit(e) {
+async function onSubmit(e) {
     let memberId = $('#id').val();
     let password = $('#pw').val();
     if(memberId == ""){
@@ -34,29 +32,49 @@ function onSubmit(e) {
         $("#pw").focus();
         return;
     }
-    $.ajax({
-      url: "localhost:8080/member/login/user",
-      type: "POST",
-      data: {
-        memberId: memberId,
-        password: password
-      },
-      success: data => {
-        // 틀린 경우 전달 뭘로받음?
-        if(data == "false")
-          alert("잘못된 아이디이거나, 비밀번호가 틀렸습니다.")
-        else {
-          location.href = "../mainpage/mainpage.html"
-          window.localStorage.setItem("memberId", memberId)
-        }
-      },
-      error: () => {
-        console.error("로그인 실패")
-        location.href = "../mainpage/mainpage.html"
-      }
-    })
 
-    // localStorage.setItem("memberId", )
+    const requestData = JSON.stringify({
+      memberId: memberId,
+      password: password
+    })
+    let userData = {
+      memberId: 0,
+      foodMarketId: 0
+    }
+    // API 호출
+    await fetch("/member/login/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: requestData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(` ${response.status} 요청 실패`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      userData = data
+    })
+    .catch(error => {
+      console.error(`로그인 실패 : ${error}`);
+    });
+  
+    if(userData.status == -1) {
+      alert("잘못된 아이디이거나, 비밀번호가 틀렸습니다.");
+      return
+    }
+    else {
+      location.href = "../mainpage/mainpage.html"
+      window.localStorage.setItem("memberId", memberId)
+    }
+    
+    if (userData.foodMarketId == -1) {
+      console.log("기부자 로그인")
+    } else {
+      console.log("관리자 로그인")
+      window.localStorage.setItem("foodMarketId", userData.foodMarketId)
+    }
 }
 
 const loginForm = document.querySelector("#loginbtn");
