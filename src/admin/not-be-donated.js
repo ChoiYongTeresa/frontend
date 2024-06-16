@@ -66,7 +66,7 @@ const fetchItems = async () => {
         // 여기에 실제 API 호출 코드 작성
         // const response = await fetch('/api/items');
         // const data = await response.json();
-        
+
         // 현재는 로컬 스토리지를 사용
         const data = JSON.parse(localStorage.getItem("itemList")) || dummyData;
         return data;

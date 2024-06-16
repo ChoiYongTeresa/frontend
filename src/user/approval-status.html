@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="approval-status.css">
     <!-- Google Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">   
@@ -17,17 +19,17 @@
     <!-- HEADER -->
     <div id="headers"></div>
     <div class="container-main">
-        <header class="container-title">
-            <h2 id="donation-title" class="title"></h2>
-            <p id="author-name" class="author"></p>
-        </header>
+        <!-- 1. 타이틀 -->
+        <div class="title">
+            <p>기부할 센터 최종 선택하기</p>
+        </div>
+<!--        <header class="container-title">-->
+<!--            <h2 id="donation-title" class="title"></h2>-->
+<!--            <p id="author-name" class="author"></p>-->
+<!--        </header>-->
         <div class="container-center">
-            <div class="center-info">
-                <h3 id="center-name" class="center-title"></h3>
-                <p id="center-address" class="center-address"></p>
-            </div>
-            <div class="container-checkbox">
-            </div>
+            <label for="" id="center-name" class="center-title"></label>
+            <input type="checkbox" class="container-checkbox" id="">
         </div>
 
         <section id="item-list" class="container-item-list">

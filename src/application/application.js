@@ -283,8 +283,14 @@ applyBtn.addEventListener("click", async () => {
     return response.json();
   })
   .then(data => {
-    console.log(`기부 신청서 저장 성공 : ${data}`)
-    productIdList = data.productIds
+    if (confirm("신청하시겠습니까?") == true){
+      console.log(`기부 신청서 저장 성공 : ${data}`)
+      productIdList = data.productIds
+      alert("신청을 완료하였습니다.")
+      location.href = "../mainpage/mainpage.html";
+    }else{
+      console.log("취소되었습니다");
+    }
   })
   .catch(error => {
     console.error(`기부 신청서 저장 실패 : ${error}`);

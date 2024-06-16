@@ -51,7 +51,7 @@ const subContentDiv = document.querySelector('.sub-content p');
 document.addEventListener('DOMContentLoaded', async () => {
 	
 	memberId = localStorage.getItem("memberId")
-	if (memberId == "") {
+	if (memberId == null) {
 		subContentDiv.innerHTML = "로그인해주세요.";
 		return;
 	}

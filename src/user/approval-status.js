@@ -5,6 +5,7 @@ $(document).ready(function() {
     let productId = [];
     let imgs = [];
     let donationData = [];
+    let foodMarketIds = [];
 
     async function fetchData() {
         await fetch(API_URL+`?donationFormId=${donationFormId}`, {
@@ -41,7 +42,6 @@ $(document).ready(function() {
                 .then(data => {
                     const url = URL.createObjectURL(data);
                     imgs.push(url)
-                    console.log(url)
                 })
                 .catch(error => {
                     console.error(error)
@@ -63,9 +63,7 @@ $(document).ready(function() {
         itemList.empty();
 
         let i = 0;
-        console.log(imgs)
         donationData.selectedProductList.forEach(product => {
-            console.log(imgs[i])
             const itemHTML = `
                 <article class="container-item">
                     <img src="${imgs[i]}" alt="${product.productName}" class="item-image" id="${product.productName}">
@@ -73,7 +71,7 @@ $(document).ready(function() {
                         <p class="item-name">${product.productName}</p>
                         <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
                         <div class="container-info-class"><p class="class-name">개수</p><p class="class-value">${product.productQuantity}개</p></div>
-                        <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${product.expirationDate}</p></div>
+                        <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${formatDate(product.expireDate)}</p></div>
                         <div class="container-info-class"><p class="class-name">보관 방법</p><p class="class-value">${getStoreType(product.storeType)}</p></div>
                     </div>
                     <h2 class="status">${getApprovalStatus(product.isSelected)}</h2>
@@ -82,17 +80,40 @@ $(document).ready(function() {
             itemList.append(itemHTML);
             i = i + 1;
         });
-
-        const centerList = donationData.centers || [];
+        let centerList = []
+        centerList.push({id: donationData.foodMarketId, name:donationData.foodMarketName})
+        // donationData.forEach(list => {
+        // })
+        console.log(centerList)
         const containerCheckbox = $('.container-checkbox');
         containerCheckbox.empty();
 
         centerList.forEach(center => {
             const centerHTML = `
-                <input type="checkbox" id="center${center.id}" name="center" value="${center.id}">
-                <label for="center${center.id}">${center.name}</label>
+            <input type="checkbox" class="container-checkbox" name="center" id="${center.id}" value="${center.id}">
+            <label for="${center.id}" id="center-name" class="center-title">${center.name}</label>
             `;
+            console.log(center.id)
+            const selectedFoodMarketId = $('input[name="center"]').val();
+            console.log(selectedFoodMarketId)
             containerCheckbox.append(centerHTML);
+            // const checkbox = document.getElementById(center.id);
+            // checkbox.addEventListener('change', function(event) {
+            //     if (event.target.checked) {
+            //         // Checkbox is checked, add the ID to the list
+            //         foodMarketIds.push(event.target.id);
+            //         console.log("ㅇㅇㅇㅇ")
+            //     } else {
+            //         // Checkbox is unchecked, remove the ID from the list
+            //         const index = foodMarketIds.indexOf(event.target.id);
+            //         if (index > -1) {
+            //             foodMarketIds.splice(index, 1);
+            //         }
+            //     }
+            //
+            //     // Logging the updated list to the console
+            //     console.log(foodMarketIds);
+            // });
         });
     }
 
@@ -125,7 +146,10 @@ $(document).ready(function() {
     function saveSelectedCenter() {
         const selectedFoodMarketId = $('input[name="center"]:checked').val();
         if (!selectedFoodMarketId) {
-            alert("센터를 선택하세요.");
+            alert("저장되었습니다!");
+            location.href = "../mainpage/mainpage.html";
+            // console.log($('input[name="center"]'))
+            // console.log($('input[name="center"]:checked'))
             return;
         }
 
@@ -152,3 +176,11 @@ $(document).ready(function() {
 
     fetchData();
 });
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}

@@ -14,25 +14,25 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
             const authorElement = document.querySelector('.author');
-            authorElement.textContent = data.donorName;
+            authorElement.textContent = data[0].name; // 첫 번째 항목의 기부자 이름 설정
 
             const titleElement = document.querySelector('.title');
-            titleElement.textContent = `${data.productName} ${data.productNum}개`;
+            titleElement.textContent = `${data.length}개의 기부 항목`; // 항목 개수 설정
 
-            const relationId = data.relationId; // response에서 relationId 저장
+            const relationId = data[0].relationId; // response에서 relationId 저장
 
-            const items = [{
-                name: data.productName,
-                weight: data.productWeight || '', // weight가 없다면 빈 문자열
-                quantity: data.productNum,
-                expirationDate: data.expireDate,
-                storageMethod: data.productStorage === 1 ? '실온' : '냉장', // 수정 필요
-                image: data.productUrl || '',
-                selected: false // 이미 승인된 기부에 들어갔을 때 선택이 가능한 문제(수정 필요)
-            }];
+            const items = data.map(item => ({
+                name: item.productName,
+                weight: item.productWeight || '', // weight가 없다면 빈 문자열
+                quantity: item.productNum,
+                expirationDate: formatDate(item.expireDate), // 날짜 포맷팅
+                storageMethod: getStorageMethod(item.productStorage),
+                image: item.productUrl || '',
+                selected: false
+            }));
 
             const containerItemList = document.querySelector('.container-item-list');
-            containerItemList.innerHTML = ''; 
+            containerItemList.innerHTML = '';
 
             items.forEach((item, index) => {
                 const article = document.createElement('article');
@@ -64,6 +64,15 @@ window.onload = function() {
         .catch(error => {
             console.error('Error fetching donation data:', error);
         });
+}
+
+function getStorageMethod(storageCode) {
+    switch (storageCode) {
+        case 1: return '실온';
+        case 2: return '냉장';
+        case 3: return '냉동';
+        default: return '알 수 없음';
+    }
 }
 
 function toggleButton(event) {
@@ -102,15 +111,23 @@ function approveItems(relationId) {
             relationId: relationId // request에 relationId만 포함
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 200) {
-            console.log(`Approval successful`);
-        } else {
-            console.error(`Approval failed`);
-        }
-    })
-    .catch(error => {
-        console.error('Error approving item:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 200) {
+                console.log(`Approval successful`);
+            } else {
+                console.error(`Approval failed`);
+            }
+        })
+        .catch(error => {
+            console.error('Error approving item:', error);
+        });
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
