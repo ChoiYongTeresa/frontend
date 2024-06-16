@@ -1,4 +1,4 @@
-function onSubmit(e) {
+async function onSubmit(e) {
     let memberId = $('#id').val();
     let password = $('#pw').val();
     let name = $('#name').val();
@@ -17,24 +17,35 @@ function onSubmit(e) {
         $("#pw").focus();
         return;
     }
-    $.ajax({
-      url: "localhost:8080/member/register/user",
-      type: "POST",
-      data: {
-        memberId: memberId,
-        password: password,
-        email: email,
-        memberName: name,
-        phnoeNumber: telephone,
-        address: address
-      },
-      success: data => {
-        location.href = "./login.html"
-      },
-      error: () => {
-        console.error("회원가입 실패")
-      }
+    
+    const requestData = JSON.stringify({
+      memberId: memberId,
+      password: password,
+      email: email,
+      memberName: name,
+      phnoeNumber: telephone,
+      address: address
     })
+
+    // API 호출
+    await fetch("/member/register/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: requestData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(` ${response.status} 요청 실패`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('회원가입 성공')
+        location.href = "./login.html"
+    })
+    .catch(error => {
+      console.error(`회원가입 실패 : ${error}`);
+    });
 
 }
 
