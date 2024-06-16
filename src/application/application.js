@@ -15,6 +15,8 @@ document.getElementById('upload-icon').addEventListener('click', function() {
   document.getElementById('file-input').click();
 });
 
+let STATIC_IMG = {};
+
 document.getElementById('file-input').addEventListener('change', function(event) {
   const files = event.target.files;
   const container = document.getElementById('gallery-container');
@@ -24,7 +26,7 @@ document.getElementById('file-input').addEventListener('change', function(event)
     reader.onload = function(e) {
       const imgElement = document.createElement('img');
       const src = e.target.result;
-      img = {name: file.name, src: src, productId: 0};
+      STATIC_IMG = {name: file.name, src: file, productId: 11};
       imgElement.src = src;
       imgElement.className = 'uploaded-img';
       container.appendChild(imgElement);
@@ -77,7 +79,7 @@ document.querySelector("#putbtn").addEventListener("click", () => {
     curitem.itemname = $('#itemname').val();
   }
   if ($('#itemcount').val() != "") {
-    curitem.itemcount = $('#itemcount').val()+$('#itemcountway').val();
+    curitem.itemcount = $('#itemcount').val();
   }
   if ($('#expire').val() != null) {
     curitem.expire = $('#expire').val();
@@ -247,25 +249,29 @@ applyBtn.addEventListener("click", async () => {
   const email = $('#useremail').val();
 
   const applicaiontRequestData = JSON.stringify({
-    id: memberId,
-    name: name,
-    phone: phone,
-    email: email,
+    // id: memberId,
+    memberId: 1,
+    // name: name,
+    // phone: phone,
+    // email: email,
     productList: items.map(product => ({
-      productCategory: product.category,
-      productName: product.itemname,
-      productNum: product.itemcount,
-      expirationDate: product.expire,
-      productStorage: product.howtokeep,
-      productUrl: product.img
+      category: product.category,
+      name: product.itemname,
+      quantity: 1,
+      // quantity: product.itemcount,
+      expireDate: product.expire,
+      // storeType: product.howtokeep,
+      storeType: 1,
+      weight: 500,
+      isSelected: 0
     })),
-    foodmarket_list: selectedcenter
+    foodMarketList: selectedcenter
   })
 
   let productIdList = [];
-
+  console.log(applicaiontRequestData);
   // Fetch API 호출 - 신청서
-  await fetch("/donations/product/donation_form", {
+  await fetch("/donations/product/donationForm", {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
     body: applicaiontRequestData
@@ -289,17 +295,13 @@ applyBtn.addEventListener("click", async () => {
   // Fetch API 호출 - 첨부파일
   for (let id of productIdList) {
 
-    img.productId = id
+    STATIC_IMG.productId = id
+    const formData = new FormData();
+    formData.append('attachment', STATIC_IMG.src)
 
-    let attachRequestData = JSON.stringify({
-      attachment: img.src,
-      productId: img.productId
-    })
-
-    await fetch("/donations/attachment/"+img.productId, {
+    await fetch("/donation/attachment/"+STATIC_IMG.productId, {
       method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: attachRequestData
+      body: formData
     })
     .then(response => {
       if (!response.ok) {

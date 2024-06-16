@@ -38,8 +38,9 @@ async function onSubmit(e) {
       password: password
     })
     let userData = {
-      memberId: 0,
-      foodMarketId: 0
+      memberId: memberId,
+      foodMarketId: 0,
+        status: 0
     }
     // API 호출
     await fetch("/member/login", {
@@ -54,7 +55,8 @@ async function onSubmit(e) {
       return response.json();
     })
     .then(data => {
-      userData = data
+      userData.foodMarketId = data.foodMarketId
+        userData.status = data.status
     })
     .catch(error => {
         console.log(`로그인 실패 : ${error}`);
@@ -84,13 +86,13 @@ loginForm.addEventListener("click", ()=>{onSubmit()});
 function checkAdmin(userData) {
     if(userData.foodMarketId === -1) {
         console.log("기부자 로그인");
-        window.localStorage.setItem("memberId", memberId);
+        window.localStorage.setItem("memberId", userData.memberId);
         location.href = "../mainpage/mainpage.html";
     } else {
         console.log("관리자 로그인");
         console.log(userData.foodMarketId);
+        window.localStorage.setItem("memberId", userData.memberId);
         window.localStorage.setItem("foodMarketId", userData.foodMarketId);
-        alert(window.localStorage.getItem("foodMarketId"));
         location.href = "../admin/admin-main.html";
     }
 }

@@ -63,7 +63,9 @@ $(document).ready(function() {
         itemList.empty();
 
         let i = 0;
+        console.log(imgs)
         donationData.selectedProductList.forEach(product => {
+            console.log(imgs[i])
             const itemHTML = `
                 <article class="container-item">
                     <img src="${imgs[i]}" alt="${product.productName}" class="item-image" id="${product.productName}">
