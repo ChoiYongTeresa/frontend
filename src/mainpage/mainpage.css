@@ -1,6 +1,11 @@
+/* Google web font CDN*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+
+
 /* COMMON */
 body {
-    line-height: 1.4;
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.4;
 }
 img {
     display: block;

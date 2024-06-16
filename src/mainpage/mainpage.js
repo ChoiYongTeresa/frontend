@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		subContentDiv.innerHTML = "로그인해주세요.";
 		return;
 	}
-
+	
     // API 호출 함수
 	await fetch("/donations/"+memberId)
 	.then(response => {
