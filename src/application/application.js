@@ -37,14 +37,10 @@ document.getElementById('file-input').addEventListener('change', function(event)
 내 정보 불러오기
 */
 document.querySelector('#load').addEventListener("click", async () => {
-
-  const requestData = JSON.stringify({ memberId: memberId });
-
   // Fetch API 호출
 	await fetch("/member/summary/"+memberId, {
     method: "GET",
     headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: requestData
   })
   .then(response => {
     if (!response.ok) {
@@ -53,15 +49,16 @@ document.querySelector('#load').addEventListener("click", async () => {
     return response.json();
   })
 	.then(data => {
-    userInfo.name = data.memberName;
-    userInfo.phone = data.phoneNumber;
-    userInfo.email = data.email;
+    userInfo.name = data.summary.memberName;
+    userInfo.phone = data.summary.phoneNumber;
+    userInfo.email = data.summary.email;
 	})
 	.catch(error => {
     console.error(error)
     alert("로그인해주세요.")
   });
 
+  console.log(userInfo)
   document.querySelector('#username').value = userInfo.name;
   document.querySelector('#userphone').value = userInfo.phone;
   document.querySelector('#useremail').value = userInfo.email;
@@ -130,7 +127,7 @@ centerSort.addEventListener("change", async () => {
   // 정렬 기준 선택하는 드롭박스
   const centerSortType = $('select[name="centerSort"] > option:checked').value;
   // 클라이언트의 현재 위치
-  const address = { latitude: 0, longitude:0 };
+  let address = { latitude: 0, longitude:0 };
   navigator.geolocation.getCurrentPosition(position => {
     address = {
       latitude: position.coords.latitude,
@@ -311,13 +308,10 @@ applyBtn.addEventListener("click", async () => {
       return response.json();
     })
     .then(data => {
-      userInfo.name = data.memberName;
-      userInfo.phone = data.phoneNumber;
-      userInfo.email = data.email;
+      console.log(data.filepath)
     })
     .catch(error => {
       console.error(error)
-      alert("로그인해주세요.")
     });
   }
 })
