@@ -2,8 +2,10 @@ $(document).ready(function() {
     const API_URL = '/donation/selected_info';
     const SAVE_URL = '/donations/selection/';
     const donationFormId = 1; // 실제 donationFormId 설정 필요
+    let productId = [];
+    let imgs = [];
 
-    function fetchData() {
+    async function fetchData() {
         $.ajax({
             url: API_URL,
             method: 'GET',
@@ -23,10 +25,11 @@ $(document).ready(function() {
                     const itemList = $('#item-list');
                     itemList.empty();
 
+                    let i = 0;
                     donationData.selectedProductList.forEach(product => {
                         const itemHTML = `
                             <article class="container-item">
-                                <img src="../assets/${product.productName.toLowerCase()}.png" alt="${product.productName}" class="item-image">
+                                <img src="${imgs[i]}" alt="${product.productName}" class="item-image">
                                 <div class="container-item-info">
                                     <p class="item-name">${product.productName}</p>
                                     <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
@@ -38,6 +41,8 @@ $(document).ready(function() {
                             </article>
                         `;
                         itemList.append(itemHTML);
+                        productId.push(product.productId);
+                        i = i + 1;
                     });
 
                     const centerList = donationData.centers || [];
@@ -57,6 +62,27 @@ $(document).ready(function() {
                 console.error('Error fetching donation data:', error);
             }
         });
+
+        for (let id of productId) {
+            await fetch("/donations/attachment/"+img.productId, {
+            method: "GET",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(` ${response.status} 요청 실패`);
+            }
+            return response.blob();
+          })
+          .then(data => {
+            const url = URL.createObjectURL(blob);
+            imgs.push(url)
+          })
+          .catch(error => {
+            console.error(error)
+          });
+        }
+        
     }
 
     function getStoreType(storeType) {
