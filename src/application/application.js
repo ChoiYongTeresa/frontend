@@ -5,7 +5,7 @@ let totalItemCount = []
 let centerlist = [
   {id:1, foodMarketName:"실패뱅크", phoneNumber:"042-123-2134", address:"실패구 실패동 실패로", detailAddress:"실패디테일주소"},
 ];
-let selectedcenter = [1, 2];
+let selectedcenter = [];
 const memberId = localStorage.getItem("memberId");
 
 /*
@@ -139,7 +139,7 @@ centerSort.addEventListener("change", async () => {
   });
 
   const requestData = JSON.stringify({
-    sort_type: centerSortType,
+    sortType: centerSortType,
     latitude: address.latitude,
     longitude: address.longitude,
     foodList: totalItemCount
@@ -205,7 +205,7 @@ function toggleColor(element, center) {
   // 현재 배경색이 하얀색이면 초록색으로, 아니면 하얀색으로 변경
   if (element.style.backgroundColor === 'white') {
     centerMapDiv.innerHTML = "";
-    // selectedcenter.push(element)
+    selectedcenter.push(center.id)
       element.style.backgroundColor = '#28995C'; // 초록색
       element.style.color = 'white'; // 텍스트 색상 변경
       
@@ -230,6 +230,7 @@ function toggleColor(element, center) {
       phone.textContent = center.phoneNumber;
       centerMapDiv.appendChild(phone);
   } else {
+    selectedcenter.pop(center.id)
       element.style.backgroundColor = 'white'; // 하얀색
       element.style.color = 'black'; // 텍스트 색상을 검은색으로 변경
       
@@ -253,13 +254,13 @@ applyBtn.addEventListener("click", async () => {
     name: name,
     phone: phone,
     email: email,
-    product_list: items.map(product => ({
-      product_category: product.category,
-      product_name: product.itemname,
-      product_num: product.itemcount,
-      expiration_date: product.expire,
-      product_storage: product.howtokeep,
-      product_url: product.imgs
+    productList: items.map(product => ({
+      productCategory: product.category,
+      productName: product.itemname,
+      productNum: product.itemcount,
+      expirationDate: product.expire,
+      productStorage: product.howtokeep,
+      productUrl: product.imgs
     })),
     foodmarket_list: selectedcenter
   })
