@@ -1,27 +1,33 @@
-// approval-list.js
-
-// 더미 데이터 정의 (더 많은 항목 추가)
-const dummyData = [
-    { no: 1, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    { no: 2, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    { no: 3, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 4, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 5, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 6, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 7, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 8, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 9, title: "계란 30개", author: "서은서", status: "반려" },
-    // { no: 10, title: "밀가루 1개, 참치 2개", author: "조단현", status: "승인 대기" },
-    // { no: 11, title: "소보로빵 3개", author: "임세빈", status: "승인 완료" },
-    // { no: 12, title: "계란 30개", author: "서은서", status: "반려" },
-];
-
+const API_URL = '/admin/donations/requestList';
+const foodMarketId = window.localStorage.getItem("foodMarketId");
 const itemsPerPage = 10;
 let currentPage = 1;
 
 window.onload = function() {
-    displayList(dummyData, itemsPerPage, currentPage);
-    setupPagination(dummyData, itemsPerPage);
+    fetchDonationRequests(foodMarketId).then(data => {
+        displayList(data, itemsPerPage, currentPage);
+        setupPagination(data, itemsPerPage);
+    }).catch(error => {
+        console.error('Error fetching donation requests:', error);
+        alert('기부 신청 리스트를 불러오는데 실패했습니다.');
+    });
+}
+
+function fetchDonationRequests(foodMarketId) {
+    return fetch(`${API_URL}?foodMarketId=${foodMarketId}`)
+        .then(response => response.json())
+        .then(data => data.map((item, index) => ({
+            no: index + 1,
+            donationId: item.donationFormId,
+            title: `기부 신청 ${item.donationFormId}`,
+            author: item.donorName,
+            status: item.approvedDate ? "처리 완료" : "처리 전",
+            selectedDate: item.selectedDate
+        })))
+        .catch(error => {
+            console.error('Error fetching donation requests:', error);
+            throw error;
+        });
 }
 
 function displayList(items, itemsPerPage, page) {
@@ -41,7 +47,11 @@ function displayList(items, itemsPerPage, page) {
         row.appendChild(cellNo);
         
         const cellTitle = document.createElement('td');
-        cellTitle.textContent = item.title;
+        const titleLink = document.createElement('a');
+        // titleLink.href = `/item-select.html?donationId=${item.donationId}?`;
+        titleLink.href = `/item-select.html?donationId=${item.donationId}&foodMarketId=${foodMarketId}`;
+        titleLink.textContent = item.title;
+        cellTitle.appendChild(titleLink);
         row.appendChild(cellTitle);
         
         const cellAuthor = document.createElement('td');
@@ -51,9 +61,9 @@ function displayList(items, itemsPerPage, page) {
         const cellStatus = document.createElement('td');
         cellStatus.textContent = item.status;
 
-        if (item.status === "승인 대기") {
+        if (item.status === "처리 전") {
             cellStatus.classList.add('status-pending');
-        } else if (item.status === "승인 완료") {
+        } else if (item.status === "처리 완료") {
             cellStatus.classList.add('status-approved');
         }
         
@@ -84,7 +94,7 @@ function paginationButton(page, items) {
         displayList(items, itemsPerPage, currentPage);
 
         const currentBtn = document.querySelector('.pagination button.active');
-        currentBtn.classList.remove('active');
+        if (currentBtn) currentBtn.classList.remove('active');
 
         button.classList.add('active');
     });
