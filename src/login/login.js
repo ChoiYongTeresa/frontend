@@ -65,19 +65,32 @@ async function onSubmit(e) {
       return
     }
     else {
-      location.href = "../mainpage/mainpage.html"
-        alert(memberId)
-      window.localStorage.setItem("memberId", memberId)
+        checkAdmin(userData);
     }
     
-    if (userData.foodMarketId == -1) {
-      console.log("기부자 로그인")
-    } else {
-      console.log("관리자 로그인")
-    }
-    window.localStorage.setItem("foodMarketId", userData.foodMarketId)
+    // if (userData.foodMarketId == -1) {
+    //   console.log("기부자 로그인")
+    // } else {
+    //   console.log("관리자 로그인")
+    //     console.log(userData.foodMarketId)
+    // }
+    // window.localStorage.setItem("foodMarketId", userData.foodMarketId)
 
 }
 
 const loginForm = document.querySelector("#loginbtn");
 loginForm.addEventListener("click", ()=>{onSubmit()});
+
+function checkAdmin(userData) {
+    if(userData.foodMarketId === -1) {
+        console.log("기부자 로그인");
+        window.localStorage.setItem("memberId", memberId);
+        location.href = "../mainpage/mainpage.html";
+    } else {
+        console.log("관리자 로그인");
+        console.log(userData.foodMarketId);
+        window.localStorage.setItem("foodMarketId", userData.foodMarketId);
+        alert(window.localStorage.getItem("foodMarketId"));
+        location.href = "../admin/admin-main.html";
+    }
+}

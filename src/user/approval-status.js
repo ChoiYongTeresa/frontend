@@ -4,67 +4,32 @@ $(document).ready(function() {
     const donationFormId = 1; // 실제 donationFormId 설정 필요
     let productId = [];
     let imgs = [];
+    let donationData = [];
 
     async function fetchData() {
-        $.ajax({
-            url: API_URL,
+        await fetch(API_URL+`?donationFormId=${donationFormId}`, {
             method: 'GET',
             contentType: 'application/json',
-            data: { donationFormId: donationFormId },
-            success: function(data) {
-                if (data && data.length > 0) {
-                    const donationData = data[0];
-
-                    $('#donation-title').text(donationData.foodMarketName);
-                    $('#author-name').text(donationData.donorName); // 작성자 이름 설정
-
-                    $('#center-name').text(donationData.foodMarketName);
-                    $('#center-address').text(donationData.centerAddress || '');
-
-                    // 아이템 로드
-                    const itemList = $('#item-list');
-                    itemList.empty();
-
-                    let i = 0;
-                    donationData.selectedProductList.forEach(product => {
-                        const itemHTML = `
-                            <article class="container-item">
-                                <img src="${imgs[i]}" alt="${product.productName}" class="item-image">
-                                <div class="container-item-info">
-                                    <p class="item-name">${product.productName}</p>
-                                    <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
-                                    <div class="container-info-class"><p class="class-name">개수</p><p class="class-value">${product.productQuantity}개</p></div>
-                                    <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${product.expirationDate}</p></div>
-                                    <div class="container-info-class"><p class="class-name">보관 방법</p><p class="class-value">${getStoreType(product.storeType)}</p></div>
-                                </div>
-                                <h2 class="status">${getApprovalStatus(product.isSelected)}</h2>
-                            </article>
-                        `;
-                        itemList.append(itemHTML);
-                        productId.push(product.productId);
-                        i = i + 1;
-                    });
-
-                    const centerList = donationData.centers || [];
-                    const containerCheckbox = $('.container-checkbox');
-                    containerCheckbox.empty();
-
-                    centerList.forEach(center => {
-                        const centerHTML = `
-                            <input type="checkbox" id="center${center.id}" name="center" value="${center.id}">
-                            <label for="center${center.id}">${center.name}</label>
-                        `;
-                        containerCheckbox.append(centerHTML);
-                    });
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(` ${response.status} 요청 실패`);
                 }
-            },
-            error: function(error) {
-                console.error('Error fetching donation data:', error);
-            }
-        });
+                return response.json();
+            })
+            .then(data => {
+                donationData = data[0]
+                donationData.selectedProductList.forEach(product => {
+                    productId.push(product.productId);
+                });
+            })
+            .catch(error => {
+                console.error(error)
+            });
 
         for (let id of productId) {
-            await fetch("/donations/attachment/"+img.productId, {
+            await fetch("/donations/attachment/"+id, {
             method: "GET",
             headers: { "Content-Type": "application/json; charset=utf-8" },
           })
@@ -77,12 +42,57 @@ $(document).ready(function() {
           .then(data => {
             const url = URL.createObjectURL(blob);
             imgs.push(url)
+              console.log(url)
           })
           .catch(error => {
             console.error(error)
           });
         }
+        loadData(donationData)
         
+    }
+
+    function loadData(donationData) {
+        $('#donation-title').text(donationData.foodMarketName);
+        $('#author-name').text(donationData.donorName); // 작성자 이름 설정
+
+        $('#center-name').text(donationData.foodMarketName);
+        $('#center-address').text(donationData.centerAddress || '');
+
+        // 아이템 로드
+        const itemList = $('#item-list');
+        itemList.empty();
+
+        let i = 0;
+        donationData.selectedProductList.forEach(product => {
+            const itemHTML = `
+                <article class="container-item">
+                    <img src="${imgs[i]}" alt="${product.productName}" class="item-image" id="${product.productName}">
+                    <div class="container-item-info">
+                        <p class="item-name">${product.productName}</p>
+                        <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
+                        <div class="container-info-class"><p class="class-name">개수</p><p class="class-value">${product.productQuantity}개</p></div>
+                        <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${product.expirationDate}</p></div>
+                        <div class="container-info-class"><p class="class-name">보관 방법</p><p class="class-value">${getStoreType(product.storeType)}</p></div>
+                    </div>
+                    <h2 class="status">${getApprovalStatus(product.isSelected)}</h2>
+                </article>
+            `;
+            itemList.append(itemHTML);
+            i = i + 1;
+        });
+
+        const centerList = donationData.centers || [];
+        const containerCheckbox = $('.container-checkbox');
+        containerCheckbox.empty();
+
+        centerList.forEach(center => {
+            const centerHTML = `
+                <input type="checkbox" id="center${center.id}" name="center" value="${center.id}">
+                <label for="center${center.id}">${center.name}</label>
+            `;
+            containerCheckbox.append(centerHTML);
+        });
     }
 
     function getStoreType(storeType) {
