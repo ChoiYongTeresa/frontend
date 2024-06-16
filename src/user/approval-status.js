@@ -1,55 +1,64 @@
 $(document).ready(function() {
     const API_URL = '/donation/selected_info';
-    const SAVE_URL = '/donations/selection/'; // foodmarket_id 동적으로 추가
+    const SAVE_URL = '/donations/selection/';
+    const donationFormId = 1; // 실제 donationFormId 설정 필요
 
     function fetchData() {
-        $.getJSON(API_URL, function(data) {
-            if (data && data.length > 0) {
-                const donationData = data[0];
+        $.ajax({
+            url: API_URL,
+            method: 'GET',
+            contentType: 'application/json',
+            data: { donationFormId: donationFormId },
+            success: function(data) {
+                if (data && data.length > 0) {
+                    const donationData = data[0];
 
-                $('#donation-title').text(donationData.foodmarket_name);
-                $('#author-name').text("조단현");
+                    $('#donation-title').text(donationData.foodMarketName);
+                    $('#author-name').text(donationData.donorName); // 작성자 이름 설정
 
-                $('#center-name').text(donationData.foodmarket_name);
-                $('#center-address').text(donationData.center_address);
+                    $('#center-name').text(donationData.foodMarketName);
+                    $('#center-address').text(donationData.centerAddress || '');
 
-                // 아이템 로드
-                const itemList = $('#item-list');
-                itemList.empty();
+                    // 아이템 로드
+                    const itemList = $('#item-list');
+                    itemList.empty();
 
-                donationData.selected_product_list.forEach(product => {
-                    const itemHTML = `
-                        <article class="container-item">
-                            <img src="../assets/${product.productName.toLowerCase()}.png" alt="${product.productName}" class="item-image">
-                            <div class="container-item-info">
-                                <p class="item-name">${product.productName}</p>
-                                <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
-                                <div class="container-info-class"><p class="class-name">개수</p><p class="class-value">${product.productQuantity}개</p></div>
-                                <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${product.expirationDate}</p></div>
-                                <div class="container-info-class"><p class="class-name">보관 방법</p><p class="class-value">${getStoreType(product.storeType)}</p></div>
-                            </div>
-                            <h2 class="status">${product.is_selected ? '승인 완료' : '승인 대기'}</h2>
-                        </article>
-                    `;
-                    itemList.append(itemHTML);
-                });
+                    donationData.selectedProductList.forEach(product => {
+                        const itemHTML = `
+                            <article class="container-item">
+                                <img src="../assets/${product.productName.toLowerCase()}.png" alt="${product.productName}" class="item-image">
+                                <div class="container-item-info">
+                                    <p class="item-name">${product.productName}</p>
+                                    <div class="container-info-class"><p class="class-name">무게</p><p class="class-value">${product.productWeight}kg</p></div>
+                                    <div class="container-info-class"><p class="class-name">개수</p><p class="class-value">${product.productQuantity}개</p></div>
+                                    <div class="container-info-class"><p class="class-name">유통기한</p><p class="class-value">${product.expirationDate}</p></div>
+                                    <div class="container-info-class"><p class="class-name">보관 방법</p><p class="class-value">${getStoreType(product.storeType)}</p></div>
+                                </div>
+                                <h2 class="status">${getApprovalStatus(product.isSelected)}</h2>
+                            </article>
+                        `;
+                        itemList.append(itemHTML);
+                    });
 
-                const centerList = donationData.centers;
-                const containerCheckbox = $('.container-checkbox');
-                containerCheckbox.empty();
+                    const centerList = donationData.centers || [];
+                    const containerCheckbox = $('.container-checkbox');
+                    containerCheckbox.empty();
 
-                centerList.forEach(center => {
-                    const centerHTML = `
-                        <input type="checkbox" id="center${center.id}" name="center" value="${center.id}">
-                        <label for="center${center.id}">${center.name}</label>
-                    `;
-                    containerCheckbox.append(centerHTML);
-                });
+                    centerList.forEach(center => {
+                        const centerHTML = `
+                            <input type="checkbox" id="center${center.id}" name="center" value="${center.id}">
+                            <label for="center${center.id}">${center.name}</label>
+                        `;
+                        containerCheckbox.append(centerHTML);
+                    });
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching donation data:', error);
             }
         });
     }
 
-    // 보관 방법을 텍스트로 변환
     function getStoreType(storeType) {
         switch (storeType) {
             case 1:
@@ -63,24 +72,36 @@ $(document).ready(function() {
         }
     }
 
-    // 센터 저장
+    function getApprovalStatus(isSelected) {
+        switch (isSelected) {
+            case 1:
+                return '승인 완료';
+            case -1:
+                return '승인 거부';
+            case 0:
+                return '승인 대기';
+            default:
+                return '상태 미정';
+        }
+    }
+
     function saveSelectedCenter() {
-        const selectedCenter = $('input[name="center"]:checked').val();
-        if (!selectedCenter) {
+        const selectedFoodMarketId = $('input[name="center"]:checked').val();
+        if (!selectedFoodMarketId) {
             alert("센터를 선택하세요.");
             return;
         }
 
         $.ajax({
-            url: SAVE_URL + selectedCenter,
+            url: SAVE_URL + selectedFoodMarketId,
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ foodmarket_id: selectedCenter }),
+            data: JSON.stringify({ foodMarketId: selectedFoodMarketId, donationFormId: donationFormId }),
             success: function(response) {
                 if (response.status === 200) {
-                    alert("센터가 성공적으로 저장되었습니다.");
+                    alert("기부 센터 결정이 성공했습니다.");
                 } else {
-                    alert("센터 저장에 실패했습니다.");
+                    alert("센터 결정에 실패했습니다.");
                 }
             },
             error: function(error) {

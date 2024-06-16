@@ -49,9 +49,6 @@ const subContentDiv = document.querySelector('.sub-content p');
 
 // main 최근 기부내역 불러오기
 document.addEventListener('DOMContentLoaded', async () => {
-
-	// 더미 데이터
-	localStorage.setItem("memberId", 1);
 	
 	memberId = localStorage.getItem("memberId")
 	if (memberId == "") {

@@ -42,7 +42,7 @@ async function onSubmit(e) {
       foodMarketId: 0
     }
     // API 호출
-    await fetch("/member/login/user", {
+    await fetch("/member/login", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: requestData
@@ -57,7 +57,7 @@ async function onSubmit(e) {
       userData = data
     })
     .catch(error => {
-      console.error(`로그인 실패 : ${error}`);
+        console.log(`로그인 실패 : ${error}`);
     });
   
     if(userData.status == -1) {
@@ -66,6 +66,7 @@ async function onSubmit(e) {
     }
     else {
       location.href = "../mainpage/mainpage.html"
+        alert(memberId)
       window.localStorage.setItem("memberId", memberId)
     }
     
@@ -73,8 +74,9 @@ async function onSubmit(e) {
       console.log("기부자 로그인")
     } else {
       console.log("관리자 로그인")
-      window.localStorage.setItem("foodMarketId", userData.foodMarketId)
     }
+    window.localStorage.setItem("foodMarketId", userData.foodMarketId)
+
 }
 
 const loginForm = document.querySelector("#loginbtn");
