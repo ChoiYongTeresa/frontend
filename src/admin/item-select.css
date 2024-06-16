@@ -151,3 +151,8 @@ body {
     background-color: #767373;
     color: #fff;
 }
+
+a.custom-link {
+    text-decoration: none;
+    color: inherit;
+}
