@@ -45,12 +45,12 @@ function displayList(items, itemsPerPage, page) {
         const cellNo = document.createElement('td');
         cellNo.textContent = item.no;
         row.appendChild(cellNo);
-        
+
         const cellTitle = document.createElement('td');
         const titleLink = document.createElement('a');
-        // titleLink.href = `/item-select.html?donationId=${item.donationId}?`;
         titleLink.href = `/item-select.html?donationId=${item.donationId}&foodMarketId=${foodMarketId}`;
         titleLink.textContent = item.title;
+        titleLink.classList.add('custom-link'); // 이 줄 추가
         cellTitle.appendChild(titleLink);
         row.appendChild(cellTitle);
         
