@@ -1,5 +1,5 @@
 let userInfo = {name:"김실패", phone:"공일공-실실실실-패패패패", email:"실패@실패.com"};
-let imgs = [];
+let img = {};
 let items = [];
 let totalItemCount = []
 let centerlist = [
@@ -24,7 +24,7 @@ document.getElementById('file-input').addEventListener('change', function(event)
     reader.onload = function(e) {
       const imgElement = document.createElement('img');
       const src = e.target.result;
-      imgs.push({name: file.name, src: src});
+      img = {name: file.name, src: src, productId: 0};
       imgElement.src = src;
       imgElement.className = 'uploaded-img';
       container.appendChild(imgElement);
@@ -91,7 +91,7 @@ document.querySelector("#putbtn").addEventListener("click", () => {
       curitem.howtokeep.push(el.value)
     });
   }
-  curitem.img = imgs;
+  curitem.img = img;
   const itemdiv = document.createElement('div');
   itemdiv.className = "submitted-item";
   const text = curitem.itemname + " (" + curitem.category + ") | " + curitem.expire + " | "
@@ -117,7 +117,7 @@ document.querySelector("#putbtn").addEventListener("click", () => {
     totalItemCount.push({category: curitem.category, count:parseInt($('#itemcount').val())})
 
   putdiv.appendChild(itemdiv);
-  imgs = [];
+  img = {};
 
 })
 
@@ -249,7 +249,7 @@ applyBtn.addEventListener("click", async () => {
   const phone = $('#userphone').val();
   const email = $('#useremail').val();
 
-  const requestData = JSON.stringify({
+  const applicaiontRequestData = JSON.stringify({
     id: memberId,
     name: name,
     phone: phone,
@@ -260,16 +260,18 @@ applyBtn.addEventListener("click", async () => {
       productNum: product.itemcount,
       expirationDate: product.expire,
       productStorage: product.howtokeep,
-      productUrl: product.imgs
+      productUrl: product.img
     })),
     foodmarket_list: selectedcenter
   })
 
-  // Fetch API 호출
+  let productIdList = [];
+
+  // Fetch API 호출 - 신청서
   await fetch("/donations/product/donation_form", {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: requestData
+    body: applicaiontRequestData
   })
   .then(response => {
     if (!response.ok) {
@@ -279,9 +281,43 @@ applyBtn.addEventListener("click", async () => {
   })
   .then(data => {
     console.log(`기부 신청서 저장 성공 : ${data}`)
+    productIdList = data.productIds
   })
   .catch(error => {
     console.error(`기부 신청서 저장 실패 : ${error}`);
     return centerlist;
   });
+
+
+  // Fetch API 호출 - 첨부파일
+  for (let id of productIdList) {
+
+    img.productId = id
+
+    let attachRequestData = JSON.stringify({
+      attachment: img.src,
+      productId: img.productId
+    })
+
+    await fetch("/donations/attachment/"+img.productId, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: attachRequestData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(` ${response.status} 요청 실패`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      userInfo.name = data.memberName;
+      userInfo.phone = data.phoneNumber;
+      userInfo.email = data.email;
+    })
+    .catch(error => {
+      console.error(error)
+      alert("로그인해주세요.")
+    });
+  }
 })
