@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const API_URL = '/donation/selected_info';
-    const SAVE_URL = '/donations/selection/';
+    const SAVE_URL = '/donation/selection/';
     const donationFormId = 1; // 실제 donationFormId 설정 필요
     let productId = [];
     let imgs = [];
@@ -29,27 +29,26 @@ $(document).ready(function() {
             });
 
         for (let id of productId) {
-            await fetch("/donations/attachment/"+id, {
-            method: "GET",
-            headers: { "Content-Type": "application/json; charset=utf-8" },
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(` ${response.status} 요청 실패`);
-            }
-            return response.blob();
-          })
-          .then(data => {
-            const url = URL.createObjectURL(blob);
-            imgs.push(url)
-              console.log(url)
-          })
-          .catch(error => {
-            console.error(error)
-          });
+            await fetch("/donation/attachment/load?productId="+id, {
+                method: "GET",
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(` ${response.status} 요청 실패`);
+                    }
+                    return response.blob();
+                })
+                .then(data => {
+                    const url = URL.createObjectURL(data);
+                    imgs.push(url)
+                    console.log(url)
+                })
+                .catch(error => {
+                    console.error(error)
+                });
         }
         loadData(donationData)
-        
+
     }
 
     function loadData(donationData) {
