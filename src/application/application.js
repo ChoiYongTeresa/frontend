@@ -1,5 +1,5 @@
 let userInfo = {name:"김실패", phone:"공일공-실실실실-패패패패", email:"실패@실패.com"};
-let imgs = new FormData();
+let imgs = [];
 let items = [];
 let totalItemCount = []
 let centerlist = [
